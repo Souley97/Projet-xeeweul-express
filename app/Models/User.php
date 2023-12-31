@@ -13,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Vinkla\Hashids\Facades\Hashids;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
 
     use HasApiTokens;
@@ -76,7 +76,19 @@ class User extends Authenticatable
     use HasTeams;
 
     // ...
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 
+    public function toggleLike(Video $video)
+    {
+        if ($this->likes()->where('video_id', $video->id)->exists()) {
+            $this->likes()->where('video_id', $video->id)->delete(); // Retirer le like
+        } else {
+            $this->likes()->create(['video_id' => $video->id]); // Ajouter le like
+        }
+    }
     public function invitedMembersCount()
     {
         // Récupérer les équipes de l'utilisateur

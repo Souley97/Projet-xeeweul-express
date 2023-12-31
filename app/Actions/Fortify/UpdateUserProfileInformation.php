@@ -22,7 +22,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
             'phone' => ['required', 'string', 'max:12'],
-            // 'payement' => ['required', 'string'],
+            'address' => ['required', 'string'],
             // 'is_admin' => ['required', 'integer'],
 
 
@@ -40,7 +40,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'phone' => $input['phone'],
-                // 'payement' => $input['payement'],
+                'address' => $input['address'],
                 // 'is_admin' => $input['is_admin'],
 
             ])->save();

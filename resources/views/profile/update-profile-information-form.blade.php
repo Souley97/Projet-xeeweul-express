@@ -7,7 +7,7 @@
 
     <x-slot name="form">
         <!-- Profile Photo -->
-        {{-- @if (Laravel\Jetstream\Jetstream::managesProfilePhotos()) --}}
+        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
                 <!-- Profile Photo File Input -->
                 <input type="file" class="hidden"
@@ -48,7 +48,7 @@
 
                 <x-input-error for="photo" class="mt-2" />
             </div>
-        {{-- @endif --}}
+        @endif
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
@@ -65,8 +65,13 @@
             <x-input id="phone" type="text" class="mt-1 block w-full" wire:model="state.phone" required autocomplete="phone" />
             <x-input-error for="phone" class="mt-2" />
         </div>
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="address" value="{{ __('address') }}" />
+            <x-input id="address" type="text" class="mt-1 block w-full" wire:model="state.address" required autocomplete="address" />
+            <x-input-error for="address" class="mt-2" />
+        </div>
         @if (Auth::user()->is_admin==1)
-            
+
         <div class="col-span-6 sm:col-span-4">
             <x-label for="is_admin" value="{{ __('Is_admin') }}" />
             <x-input id="is_admin" type="text" class="mt-1 block w-full" wire:model="state.is_admin" required autocomplete="phone" />
@@ -74,7 +79,7 @@
         </div>
         @endif
 
-        
+
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">

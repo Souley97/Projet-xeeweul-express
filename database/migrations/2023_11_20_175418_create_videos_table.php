@@ -24,10 +24,13 @@ return new class extends Migration
             $table->string('format')->nullable();
             $table->boolean('is_active')->default(true);
 
+            $table->unsignedBigInteger('views_count')->default(0);
+            $table->unsignedBigInteger('likes_count')->default(0);
+
             // Ajoutez d'autres colonnes selon vos besoins
             $table->timestamps();
         });
-        
+
     }
 
     /**

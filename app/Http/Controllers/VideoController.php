@@ -8,13 +8,17 @@ use Illuminate\Http\Request;
 use App\Models\Video;
 use Illuminate\Routing\Controller;
 use Vinkla\Hashids\Facades\Hashids;
+use App\Models\Like;
+use App\Models\User;
 
 class VideoController extends Controller
 {
     public function index()
     {
+        $users = User::all();
+        $videoeLikes = Video::with('likes')->get(); // Assurez-vous que votre modèle Video a une relation avec les likes
         $videos = Video::all()->sortDesc();
-        return view('videos.admin.index', compact('videos'));
+        return view('videos.admin.index', compact('videos','users','videoeLikes'));
     }
     public function list()
     {
@@ -55,13 +59,74 @@ class VideoController extends Controller
 
         return redirect()->route('videos.index')->with('success', 'La vidéo a été ajoutée avec succès.');
     }
-public function show($id)
-{
-    $hashVideo = Video::find($id);
-    $videos=Video::all()->where('is_active',True)->sortDesc();
 
-    return view('videos.index', ['hashVideo' => $hashVideo], compact('videos'));
+    public function show($id)
+{
+    // Chargez la vidéo avec l'id donné
+    $video = Video::findOrFail($id);
+    $hashVideo = Video::findOrFail($id);
+
+    // Incrémentez le nombre de vues (si vous avez cette fonctionnalité)
+    $video->increment('views_count');
+
+    // Chargez les likes pour cette vidéo
+    $video->load('likes');
+
+    // Chargez toutes les vidéos actives (si vous avez besoin de les afficher dans la vue)
+    $videos = Video::all()->where('is_active', true)->sortDesc();
+
+    // Passez la vidéo et d'autres données à la vue
+ return view('videos.index',  compact('videos','video','hashVideo'));
 }
+
+public function like(Video $video)
+{
+    $like = auth()->user()->likes()->where('video_id', $video->id)->first();
+
+    if ($like) {
+        $like->toggleLike();
+    } else {
+        Like::create(['user_id' => auth()->id(), 'video_id' => $video->id, 'active' => true]);
+    }
+
+    return back();
+}
+public function showAllData()
+{
+    $users = User::all();
+    $videos = Video::with('likes')->get(); // Assurez-vous que votre modèle Video a une relation avec les likes
+
+    return view('votre_vue', ['users' => $users, 'videos' => $videos]);
+}
+
+// public function show($id)
+// {
+//     $hashVideo = Video::find($id);
+//         // Incrémentez le nombre de vues
+
+//     $view = Video::find($id);
+//     $view->increment('views_count');
+//     $view->load('like');
+//     $videos=Video::all()->where('is_active',True)->sortDesc();
+//     return view('videos.index', ['hashVideo' => $hashVideo], compact('videos','view'));
+// }
+// public function like(Video $video)
+// {
+//     $like = auth()->user()->likes()->where('video_id', $video->id)->first();
+
+//     if ($like) {
+//         $like->toggleLike();
+//     } else {
+//         Like::create(['user_id' => auth()->id(), 'video_id' => $video->id, 'active' => true]);
+//     }
+
+//     return back();
+// }
+// public function like(Video $video)
+// {
+//     $video->increment('likes_count');
+//     return back();
+// }
 
 
 public function search(Request $request)

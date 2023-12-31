@@ -206,6 +206,9 @@ Route::get('/videos/list', [VideoController::class, 'list'])->name('videos.liste
 Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create');
 Route::post('/videos', [VideoController::class, 'store'])->name('videos.store');
 Route::get('/videos/{id}', [VideoController::class, 'show'])->name('videos.show');
+// livk
+Route::post('/videos/{video}/like', [VideoController::class, 'like'])->name('videos.like');
+
 
 // Route::get('/videos/{id}', [VideoController::class, 'play'])->name('videos.play');
 

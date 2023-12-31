@@ -12,8 +12,7 @@ class="site-header header-fw-1 d-flex align-items-center shadow-sm border-bottom
                 <div class="logo-lg d-none d-lg-block">
                     <div class="custom-logo-wrap"><a href="/videos" class="custom-logo-link"
                             rel="home"><img width="300" height="50"
-                                src="../../wp-content/uploads/2021/09/logo-dark.png"
-                                data-light-src="https://streamtube.marstheme.com/wp-content/uploads/2021/09/logo.png"
+                                src="/images/bg/xe/logoXeWhite.png" alt="logo Xeeweul Express"
                                 class="custom-logo" alt="Xeeweul Express" /></a></div>
                 </div>
             </div>
@@ -21,11 +20,10 @@ class="site-header header-fw-1 d-flex align-items-center shadow-sm border-bottom
         <div class="col-center col-7 col-sm-4 col-md-4 col-lg-6 col-xl-6 col-xxl-6 top-0">
             <div class="d-flex">
                 <div class="logo-sm mx-md-auto me-sm-auto d-block d-lg-none">
-                    <div class="custom-logo-wrap"><a href="../../index.html" class="custom-logo-link"
+                    <div class="custom-logo-wrap"><a href=" class="custom-logo-link"
                             rel="home"><img width="300" height="50"
-                                src="../../wp-content/uploads/2021/09/logo-dark.png"
-                                data-light-src="https://streamtube.marstheme.com/wp-content/uploads/2021/09/logo.png"
-                                class="custom-logo" alt="StreamTube" /></a></div>
+                            src="/images/bg/xe/logoXeWhite.png" alt="logo Xeeweul Express"
+                                class="custom-logo" alt="Xeeweul Express" /></a></div>
                 </div>
             </div>
             <div id="site-search" class="site-search search-form-wrap d-none d-lg-block">
@@ -36,7 +34,7 @@ class="site-header header-fw-1 d-flex align-items-center shadow-sm border-bottom
                         <span class="icon-left-open"></span>
                     </button>
                     <div class="input-group-wrap position-relative w-100">
-                        
+
                         <input id="search-input"  x-data="{ query: '' }" x-model="query" @input="search"
                             class="form-control shadow-none ps-4 search-input autocomplete" autocomplete="off"
                             aria-label="Search" name="s" placeholder="Search here..." type="text"
@@ -49,8 +47,8 @@ class="site-header header-fw-1 d-flex align-items-center shadow-sm border-bottom
                                 data-bs-toggle="dropdown">
                                 <span class="btn__icon icon-sliders"></span>
                             </button>
-                        
-                          
+
+
                         </div>
                         <button class="btn btn-outline-secondary px-4 btn-main shadow-none" type="submit">
                             <span class="btn__icon icon-search"></span>

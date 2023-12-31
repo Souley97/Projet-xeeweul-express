@@ -14,12 +14,13 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <style>
-       .sidebar a.active {
-    // Your styles for the active link
-    // For example, change background color or text color
-    bg-blue-500 text-white;
-}
-            /* Add underline or any other styling for active link */
+        .sidebar a.active {
+            // Your styles for the active link
+            // For example, change background color or text color
+            bg-blue-500 text-white;
+        }
+
+        /* Add underline or any other styling for active link */
         }
     </style>
     <link rel="icon" href="/images/bg/xe/logo.png">
@@ -55,87 +56,81 @@
                 @if (Route::has('login'))
                     @auth
                         <a href="{{ route('profile.show') }}" class="{{ request()->is('user/profile*') ? 'active' : '' }}">
-                            <span class="material-icons-sharp">
-                                dashboard
-                            </span>
+                            <span class="">
+                                <i class="fa-solid fa-user-tie"></i> </span>
                             <div class="text-menu">Profil</div>
                         </a>
                         <a href="{{ route('surveys.index') }}" class="{{ request()->is('surveys*') ? 'active' : '' }}">
-                            <span class="material-icons-sharp">
-                                receipt_long
+                            <span class="">
+                                <i class="fa-solid fa-bullseye"></i>
+
                             </span>
                             <div class="text-menu">Quiz</div>
                         </a>
                         @if (Auth::user()->is_admin == 1)
-                            <a href="{{ Route('users.index') }}"  class="{{ request()->is('users*') ? 'active' : '' }}">
-                                <span class="material-icons-sharp">
-                                    person_outline
+                            <a href="{{ Route('users.index') }}" class="{{ request()->is('users*') ? 'active' : '' }}">
+                                <span class="">
+                                    <i class="fa-solid fa-user"></i>
                                 </span>
                                 <div class="text-menu">Users</div>
                             </a>
                             <a href="{{ Route('dashboard') }}" class="{{ request()->is('dashboard*') ? 'active' : '' }}">
-                                <span class="material-icons-sharp">
-                                    insights
-                                </span>
+                                <span class="">
+                                    <i class="fa-solid fa-gauge"></i> </span>
                                 <div class="text-menu">Dashboard</div>
                             </a>
-                            <a href="{{ Route('questions.index') }}" class="{{ request()->is('questions*') ? 'active' : '' }}">
-                                <span class="material-icons-sharp">
-                                    mail_outline
+                            <a href="{{ Route('questions.index') }}"
+                                class="{{ request()->is('questions*') ? 'active' : '' }}">
+                                <span class="">
+                                    <i class="fa-regular fa-question"></i>
                                 </span>
                                 <div class="text-menu">Questionns</div>
                                 <span class="message-count">{{ $question->count() }}</span>
                             </a>
-                            <a href="{{ Route('withdrawals.index') }}" class=" {{ request()->is('withdrawals*') ? 'active':''}}">
-                                <span class="material-icons-sharp">
-                                    inventory
-                                </span>
+                            <a href="{{ Route('withdrawals.index') }}"
+                                class=" {{ request()->is('withdrawals*') ? 'active' : '' }}">
+                                <span class="">
+                                    <i class="fa-solid fa-list-check"></i> </span>
                                 <div class="text-menu">Liste Demandes</div>
                                 <span class="message-count">{{ $demande->count() }}</span>
                             </a>
-                            {{-- <a href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" class="{{ request()->is('teams/*') ? 'active':'' }}"> --}}
-                                <span class="material-icons-sharp">
-                                    report_gmailerrorred
-                                </span>
+                            <a href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"
+                                class="{{ request()->is('teams/*') ? 'active' : '' }}">
+                                <span class="">
+                                    <i class="fa-solid fa-people-group"></i> </span>
                                 <div class="text-menu">Parraeinage</div>
                             </a>
-                            <a href="{{ route('videos.index') }}" class="{{ request()->is('videos*') ? 'active':'' }}">
-                                <span class="material-icons-sharp">
-                                    report_gmailerrorred
-                                </span>
+                            <a href="{{ route('videos.index') }}" class="{{ request()->is('videos*') ? 'active' : '' }}">
+                                <span class="">
+                                    <i class="fa-brands fa-youtube"></i> </span>
                                 <div class="text-menu">Video</div>
                             </a>
 
-                            <a href="{{ route('roles.index') }}" class="{{ request()->is('setting/role*') ? 'active':'' }}">
-                                <span class="material-icons-sharp">
-                                    settings
-                                </span>
+                            <a href="{{ route('roles.index') }}"
+                                class="{{ request()->is('setting/role*') ? 'active' : '' }}">
+                                <span class="">
+                                    <i class="fa-solid fa-gears"></i> </span>
                                 <div class="text-menu">Settings</div>
                             </a>
                         @elseif (Auth::user()->is_admin == 0)
-                            <a href="{{ route('users.show', Auth::user()->id) }}" class="{{ request()->is('users*') ? 'active':'' }}">
-                                <span class="material-icons-sharp">
-                                    person_outline
+                            <a href="{{ route('users.show', Auth::user()->id) }}"
+                                class="{{ request()->is('users*') ? 'active' : '' }}">
+                                <span class="">
+                                    <i class="fa-solid fa-user"></i>
                                 </span>
                                 <div class="text-menu">Users</div>
                             </a>
-                            <a href="{{ route('surveys.index') }}"  class="{{ request()->is('surveys*') ? 'active':'' }}">
-                                <span class="material-icons-sharp">
-                                    receipt_long
-                                </span>
-                                <div class="text-menu">Quiz</div>
-                            </a>
-                            <a href="{{ route('videos.liste') }}"  >
-                                <span class="material-icons-sharp">
-                                    report_gmailerrorred
+
+                            <a href="{{ route('videos.liste') }}">
+                                <span>
+                                    <i class="fa-brands fa-youtube"></i> </span>
                                 </span>
                                 <div class="text-menu">Video</div>
                             </a>
-                            {{-- <a href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"  class="{{ request()->is('teams/*') ? 'active':'' }}"> --}}
-                                <span class="material-icons-sharp">
-                                    report_gmailerrorred
-                                </span>
-                                <div class="text-menu">Parraeinage</div>
+                            <a href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"  class="{{ request()->is('teams/*') ? 'active':'' }}">
+                            <span class="">
+                                <i class="fa-solid fa-people-group"></i> </span>
+                            <div class="text-menu">Parraeinage</div>
                             </a>
                         @endif
                     @endauth
@@ -148,55 +143,33 @@
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <span class="material-icons-sharp">
-                            logout
-                        </span>
+                            <i class="fa-solid fa-right-from-bracket"></i> </span>
                         <button wire:click="logoutUser">
                             <h3>Logout</h3>
                         </button>
                     </form>
                 </a>
-                {{-- <a href="{route('logout')}">
-                    <span class="material-icons-sharp">
-                        logout
-                    </span>
-                    <h3>Logout</h3>
-                </a>
-                @auth
 
-                <form action="{{ route('logout') }}" method="post">
-                        @method('delete')
-                    @csrf
-                    <a href="#">
-
-                    <span class="material-icons-sharp">
-                        logout
-                    </span>
-                    <button>Logout </button>
-
-                </a>
-
-                </form>
-                @endauth --}}
             </div>
         </aside>
         <!-- Add an "active" class dynamically with JavaScript -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Get all sidebar links
-        const sidebarLinks = document.querySelectorAll('.sidebar a');
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get all sidebar links
+                const sidebarLinks = document.querySelectorAll('.sidebar a');
 
-        // Add click event listener to each link
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', function () {
-                // Remove "active" class from all links
-                sidebarLinks.forEach(link => link.classList.remove('active'));
+                // Add click event listener to each link
+                sidebarLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        // Remove "active" class from all links
+                        sidebarLinks.forEach(link => link.classList.remove('active'));
 
-                // Add "active" class to the clicked link
-                this.classList.add('active');
+                        // Add "active" class to the clicked link
+                        this.classList.add('active');
+                    });
+                });
             });
-        });
-    });
-</script>
+        </script>
 
         </script>
         <nav
@@ -213,8 +186,8 @@
                         aria-controls="navbar-sticky" aria-expanded="false">
                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 17 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M1 1h15M1 7h15M1 13h15" />
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
                         </svg>
                     </button>
 
@@ -222,13 +195,6 @@
 
             </div>
 
-            {{-- @if (isset($header))
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            {{ $header }}
-        </div>
-    </header>
-@endif --}}
         </nav>
 
 
@@ -346,28 +312,7 @@
             </div>
             <!-- End of Nav -->
 
-            {{-- <div class="user-profile">
-                <div class="logo"> --}}
-            {{-- <img src="/images/bg/xe/jul.jpeg"> --}}
-            {{-- <h2>AsmrProg</h2>
-            <p>Fullstack Web Developer</p> --}}
-            {{-- <div>
-                <div>
-                    <button wire:click="generateReferralCode">Générer un code de parrainage</button>
-                    @if ($generatedCode)
-                        <p>Votre code de parrainage : {{ $generatedCode }}</p>
-                    @endif
-                </div>
 
-
-            </div>
-         --}}
-            {{-- <div>
-                <p>Votre code de parrainage : {{ generateReferralCode() }}</p>
-            </div> --}}
-            {{--
-                </div>
-            </div> --}}
 
             <div class="reminders">
                 <div class="header">
@@ -379,7 +324,7 @@
                                         <span class="inline-flex">
                                             <button type="button"
                                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
-                                                {{-- {{ Auth::user()->currentTeam->name }} --}}
+                                                {{ Auth::user()->currentTeam->name }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                                     fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -394,7 +339,7 @@
                                     <x-slot name="content">
                                         <div class="w-60">
                                             <!-- Team Management -->
-                                            {{-- <div class="block px-4 py-2 text-xs text-gray-400">
+                                            <div class="block px-4 py-2 text-xs text-gray-400">
                                                 {{ __('Manage Team') }}
                                             </div>
 
@@ -402,7 +347,7 @@
                                             <x-dropdown-link
                                                 href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
                                                 {{ __('Team Settings') }}
-                                            </x-dropdown-link> --}}
+                                            </x-dropdown-link>
 
                                             @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                                                 <x-dropdown-link href="{{ route('teams.create') }}">

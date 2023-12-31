@@ -132,6 +132,42 @@
         content="https://streamtube.marstheme.com/wp-content/uploads/2021/09/cropped-site-icon-270x270.png" />
 
 </head>
+<style>
+     .wppl-like-button .liked {
+                                        background-color: orange; /* Changer la couleur selon vos besoins */
+                                        color: white;
+     }
+     /* Ajouter des styles pour l'effet "clicked" */
+.wppl-like-button.clicked {
+    background-color: yellow; /* Changer la couleur de fond lorsqu'il est cliqué */
+    transition: background-color 0.5s ease; /* Ajouter une transition pour un effet plus fluide */
+}
+
+     </style>
+
+     {{-- annimation --}}
+
+
+<!-- Inclure jQuery dans votre projet -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Ajouter un script pour gérer le clic sur le bouton like -->
+<script>
+    $(document).ready(function () {
+        $('.form-post-like').submit(function (event) {
+            event.preventDefault();
+
+            // Ajouter la classe "clicked" au bouton
+            var button = $(this).find('.wppl-like-button');
+            button.addClass('clicked');
+
+            // Envoyer le formulaire après un court délai (par exemple, 500 ms)
+            setTimeout(function () {
+                event.target.submit();
+            }, 500);
+        });
+    });
+</script>
 <body
     class="video-template-default single single-video postid-51 wp-custom-logo wp-embed-responsive theme-streamtube pmpro-body-has-access woocommerce-no-js bm-messages-light d-flex flex-column h-100vh no-js singular has-primary-menu header-template-1 content-container-fluid woocommerce  single-comment-open elementor-default elementor-kit-8">
 

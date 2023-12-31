@@ -12,13 +12,27 @@ class Video extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['titre', 'description', 'chemin_vers_video', 'realisateur', 'duree_minutes', 'date_sortie', 'format', 'is_active', 'hashid'];
+    protected $fillable = ['titre', 'description', 'chemin_vers_video', 'realisateur', 'duree_minutes', 'date_sortie', 'format', 'is_active', 'hashid' , 'views_count',
+    'likes_count',];
 
     public function getRouteKeyName()
     {
         return 'hashid';
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
+     public function likesCount()
+    {
+        return $this->likes()->count();
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class)->where('active', true);
+    }
     // public function getHashidAttribute()
     // {
     //     return Hashids::encode($this->getKey());
@@ -29,14 +43,14 @@ class Video extends Model
         if (is_string($value) && Str::startsWith($value, ['encrypted:', 'base64:'])) {
             $value = Crypt::decryptString($value);
         }
-    
+
         return parent::resolveRouteBinding($value, $field);
     }
     // public function resolveRouteBinding($value, $field = null)
     // {
     //     return parent::resolveRouteBinding(Crypt::decryptString($value), $field);
     // }
-    
+
 
 
     // Mutator for decoding the 'hashid' attribute
@@ -46,5 +60,5 @@ class Video extends Model
     }
 
 
-   
+
 }

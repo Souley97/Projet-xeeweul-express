@@ -85,7 +85,23 @@
                     </div>
                 @endforeach
             </div>
+            {{-- liste
+            <h2>Liste des utilisateurs :</h2>
+@foreach ($users as $user)
+    <p>{{ $user->name }} - {{ $user->email }}</p>
+@endforeach
+
+<!-- Afficher toutes les vidéos et les likes -->
+<h2>Liste des vidéos avec likes :</h2>
+@foreach ($videoeLikes as $video)
+    <p>{{ $video->title }} - {{ $video->description }}</p>
+    <p>Likes : {{ $video->likes->count() }}</p>
+    @foreach ($video->likes as $like)
+        <p>{{ $like->user->name }} a aimé cette vidéo</p>
+    @endforeach
+@endforeach --}}
         </div>
+
 
 
     </x-app-layout>

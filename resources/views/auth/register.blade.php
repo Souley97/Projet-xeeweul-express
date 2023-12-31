@@ -12,16 +12,19 @@
 
             <div>
                 <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
+                    autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                    required autocomplete="username" />
             </div>
             <div class="mt-4">
-                <x-label for="phone" value="{{__('Phone') }}" />
-                <x-input id="phone"  class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required autocomplete="points" />
+                <x-label for="phone" value="{{ __('Phone') }}" />
+                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')"
+                    required autocomplete="points" />
             </div>
 
             {{-- <div class="mt-4">
@@ -32,33 +35,61 @@
 
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <div class="relative">
+                    <x-input id="password" class="form-input rounded-md shadow-sm mt-1 block w-full" type="password"
+                        name="password" required autocomplete="new-password" />
+                    <button type="button" id="togglePasswordVisibility"
+                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                        <i class="far fa-eye text-gray-500 focus:outline-none focus:text-gray-700"></i>
+                    </button>
+                </div>
             </div>
 
             <div class="mt-4">
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <div class="relative">
+                    <x-input id="password_confirmation" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                        type="password" name="password_confirmation" required autocomplete="new-password" />
+                    {{-- btn Voir --}}
+                    <button type="button" id="togglePasswordConfirmationVisibility"
+                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
+                        <i class="far fa-eye text-gray-500 focus:outline-none focus:text-gray-700"></i>
+                    </button>
+                </div>
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-label for="terms">
                         <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
+                            <x-checkbox name="terms" id="terms" required checked />
 
                             <div class="ml-2">
                                 {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
+                                    'terms_of_service' =>
+                                        '<a target="_blank" href="' .
+                                        route('terms.show') .
+                                        '" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
+                                        __('Terms of Service') .
+                                        '</a>',
+                                    'privacy_policy' =>
+                                        '<a target="_blank" href="' .
+                                        route('policy.show') .
+                                        '" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">' .
+                                        __('Privacy Policy') .
+                                        '</a>',
                                 ]) !!}
                             </div>
                         </div>
                     </x-label>
+                    <x-checkbox id="remember_me" name="remember" checked />
+
                 </div>
             @endif
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
 
@@ -66,6 +97,10 @@
                     {{ __('Register') }}
                 </x-button>
             </div>
+
         </form>
+      
+
+
     </x-authentication-card>
 </x-guest-layout>
