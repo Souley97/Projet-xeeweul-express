@@ -15,7 +15,6 @@ public function up()
 {
     Schema::create('answers', function (Blueprint $table) {
         $table->id();
-        $table->string('hashid')->nullable()->unique();
 
         $table->unsignedBigInteger('question_id');
         $table->string('reponses');
@@ -33,7 +32,7 @@ public function up()
         Schema::dropIfExists('answers');
 
         Schema::table('videos', function (Blueprint $table) {
-            $table->dropColumn('hashid');
+            //
         });
     }
 };

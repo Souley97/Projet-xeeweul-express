@@ -6,7 +6,7 @@
                 <div class="post-bottom__meta border-bottom p-4">
                     <div class="d-lg-flex align-items-start gap-4">
                         <div class="d-flex flex-column">
-                           
+
 
                             <h1 class="post-title post-title-xl text-body"> &#8211;
                                 {{ $hashVideo->titre }}</h1>
@@ -27,6 +27,21 @@
                                         {{ $video->views_count }} views
                                     </div>
                                 </div>
+                                {{-- <form action="{{ route('videos.favorite', $video) }}" method="post">
+                                    @csrf
+                                    <button type="submit"
+                                            class="flex items-center space-x-2 {{ auth()->user()->favoriteVideos->contains($video) ? 'text-red-500' : 'text-gray-500' }}">
+                                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                             viewBox="0 0 24 24" class="w-6 h-6">
+                                            <path
+                                                d="M5 3c0-1.107.893-2 2-2s2 .893 2 2s-2 .908-2 2c0 1.52 1.474 2.893 3 3.917c1.526-1.024 3-2.397 3-3.917c0-1.107.893-2 2-2s2 .893 2 2s-2 .908-2 2c0 2.21-1.79 4-4 4s-4-1.79-4-4s-1.79-4-4-4s-4 1.79-4 4s-1.79 4-4 4s-3-1.79-3-4s1.34-4 3-4s3 1.79 3 4z">
+                                            </path>
+                                        </svg>
+                                        <span>Add to Favorites</span>
+                                    </button>
+                                </form> --}}
+
+
                                 <span class="post-meta__icon icon-chat-empty"></span>
                                 <span class="post-meta__text">{{ $hashVideo->description }}</span>
                             </div>

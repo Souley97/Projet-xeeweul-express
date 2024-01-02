@@ -21,7 +21,7 @@
         }
 
         /* Add underline or any other styling for active link */
-        }
+
     </style>
     <link rel="icon" href="/images/bg/xe/logo.png">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -60,7 +60,7 @@
                                 <i class="fa-solid fa-user-tie"></i> </span>
                             <div class="text-menu">Profil</div>
                         </a>
-                        <a href="{{ route('surveys.index') }}" class="{{ request()->is('surveys*') ? 'active' : '' }}">
+                        <a href="{{ route('surveys.index') }}" class="{{ request()->is('surveys') ? 'active' : '' }}">
                             <span class="">
                                 <i class="fa-solid fa-bullseye"></i>
 
@@ -80,7 +80,7 @@
                                 <div class="text-menu">Dashboard</div>
                             </a>
                             <a href="{{ Route('questions.index') }}"
-                                class="{{ request()->is('questions*') ? 'active' : '' }}">
+                                class="{{ request()->is('questions*','question/create*') ? 'active' : '' }}">
                                 <span class="">
                                     <i class="fa-regular fa-question"></i>
                                 </span>

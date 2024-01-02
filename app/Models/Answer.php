@@ -26,14 +26,25 @@ class Answer extends Model
         return $this->belongsTo(Question::class);
     }
 
-    public function getRouteKeyName()
+    public function sluggable(): array
     {
-        return 'hashid';
+        return [
+            'slug' => [
+                'source' => 'reponses',
+            ],
+        ];
     }
 
-    public function getHashidAttribute()
+    public function getRouteKeyName(): string
     {
-        return Hashids::encode($this->getKey());
+        return 'slug';
     }
-    
+
+    public function getSlugOptions(): array
+    {
+        return [
+            'source' => 'reponses',
+        ];
+    }
+
 }

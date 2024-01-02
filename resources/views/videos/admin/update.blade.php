@@ -22,7 +22,7 @@
                 <label for="description" class="block text-sm font-medium text-gray-700">Description :</label>
                 <textarea name="description" id="description" class="mt-1 p-2 w-full border rounded-md" required>{{ old('description', $video->description) }}</textarea>
             </div>
-           
+
 
             <div class="mb-4">
                 <label for="realisateur" class="block text-sm font-medium text-gray-700">Réalisateur :</label>

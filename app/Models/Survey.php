@@ -3,6 +3,7 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -14,15 +15,38 @@ class Survey extends Model
 
     protected $fillable = [
         'titre', 'description', 'montant_recompense', 'date_limite', 'recompense_en_points', 'created_by', 'updated_by'
-    ]; 
+    ];
+
+
+    use Sluggable;
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'titre',
+            ],
+        ];
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function getSlugOptions(): array
+    {
+        return [
+            'source' => 'titre',
+        ];
+    }
 
     public function createdBy() {
         return $this->belongsTo(User::class, 'created_by');
     }
      public function updatedBy() {
         return $this->belongsTo(User::class, 'updated');
-     }    
-    
+     }
+
     public function survey()
     {
         return $this->belongsTo(Survey::class);
@@ -57,6 +81,6 @@ class Survey extends Model
     {
         return $this->belongsToMany(User::class, 'survey_user')->withTimestamps();
     }
-    
+
 
 }

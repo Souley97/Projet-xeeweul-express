@@ -10,6 +10,8 @@ class CreateUserLevelsTable extends Migration
     {
         Schema::create('user_levels', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique()->after('id');
+            
             $table->string('level_name');
             $table->integer('points_required');
 

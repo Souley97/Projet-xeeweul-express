@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -12,6 +13,29 @@ class SurveyResponse extends Model
         'question_id',
         'option_id',
     ];
+
+
+    use Sluggable;
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'titre',
+            ],
+        ];
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function getSlugOptions(): array
+    {
+        return [
+            'source' => 'titre',
+        ];
+    }
 
     public function user()
     {

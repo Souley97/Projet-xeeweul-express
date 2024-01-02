@@ -2,23 +2,45 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
 use Vinkla\Hashids\Facades\Hashids; // Add this line
-use Illuminate\Support\Str;
+
 
 class Video extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['titre', 'description', 'chemin_vers_video', 'realisateur', 'duree_minutes', 'date_sortie', 'format', 'is_active', 'hashid' , 'views_count',
+
+    protected $fillable = ['titre', 'description', 'chemin_vers_video', 'realisateur', 'duree_minutes', 'date_sortie', 'format', 'is_active', 'hashid', 'views' , 'views_count',
     'likes_count',];
 
-    public function getRouteKeyName()
+
+ use Sluggable;
+    public function sluggable(): array
     {
-        return 'hashid';
+        return [
+            'slug' => [
+                'source' => 'titre',
+            ],
+        ];
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function getSlugOptions(): array
+    {
+        return [
+            'source' => 'titre',
+        ];
+    }
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -33,19 +55,22 @@ class Video extends Model
     {
         return $this->hasMany(Like::class)->where('active', true);
     }
-    // public function getHashidAttribute()
-    // {
-    //     return Hashids::encode($this->getKey());
-    // }
-    public function resolveRouteBinding($value, $field = null)
+    public function views()
     {
-        // Check if the value is encrypted before decrypting
-        if (is_string($value) && Str::startsWith($value, ['encrypted:', 'base64:'])) {
-            $value = Crypt::decryptString($value);
-        }
-
-        return parent::resolveRouteBinding($value, $field);
+        return $this->hasMany(Video::class);
     }
+    // crypte id
+//     public function setSlugAttribute($value): void
+// {
+//     $this->attributes['slug'] = Str::slug($value);
+// }
+    // Video.php
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'user_favorite_videos', 'video_id', 'user_id')->withTimestamps();
+    }
+
+
     // public function resolveRouteBinding($value, $field = null)
     // {
     //     return parent::resolveRouteBinding(Crypt::decryptString($value), $field);

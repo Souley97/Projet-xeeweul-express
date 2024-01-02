@@ -49,15 +49,15 @@ public function editRole($userId)
     $user = User::findOrFail($userId);
     return view('admin.users.update', compact('user'));
 }
-    public function show($id)
+    public function show($slug)
 {
-    $user = User::find($id); // Récupérez l'utilisateur par son ID
+    $user = User::where('slug',$slug)->first(); // Récupérez l'utilisateur par son ID
 
     return view('admin.users.show', compact('user'));
 }
-public function edit($id)
+public function edit($slug)
 {
-    $user = User::find($id); // Récupérez l'utilisateur par son ID
+    $user = User::where('slug',$slug)->first(); // Récupérez l'utilisateur par son ID
 
     return view('admin.users.update', compact('user'));
 }

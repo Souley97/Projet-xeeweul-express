@@ -37,12 +37,12 @@
                                 </button>
 
                                   <!-- Bouton pour avancer de 10 secondes -->
-       
+
                             </video>
                         </div>
-                        
+
                         <!-- Assurez-vous d'inclure Video.js et ses styles dans votre page -->
-                      
+
                         <!-- Initialisez le lecteur vidéo avec Video.js -->
                         <script>
                             document.addEventListener('DOMContentLoaded', function () {
@@ -53,7 +53,7 @@
         //video.currentTime -= 0.5;
         video.playBackRate = -2;
         video.play();
-    }    
+    }
 
            // Fonction pour reculer la vidéo de quelques secondes
     window.rewindVideo = function () {
@@ -66,7 +66,7 @@
         var currentTime = player.currentTime();
         player.currentTime(currentTime + 10); // Ajustez la valeur selon vos besoins
     };
-                        
+
                                 // Masquer le bouton de téléchargement
                                 player.ready(function () {
                                     var controlBar = player.controlBar;
@@ -74,7 +74,7 @@
                                         controlBar.removeChild('downloadButton');
                                     }
                                 });
-                                
+
                             });
                         </script>
                     </div>

@@ -3,6 +3,7 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -14,12 +15,31 @@ public function questions(){
     return $this->hasMany(Question::class);
 }
     // app/Question.php
-
+ use Sluggable;
 
 
     // Colonnes pouvant être remplies par l'utilisateur
     protected $fillable = ['texte', 'type', 'survey_id' , 'created_by', 'updated_by'];
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'texte',
+            ],
+        ];
+    }
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function getSlugOptions(): array
+    {
+        return [
+            'source' => 'texte',
+        ];
+    }
     // Relation avec l'enquête associée
     public function survey()
     {
@@ -49,14 +69,14 @@ public function createdBy() {
 }
  public function updatedBy() {
     return $this->belongsTo(User::class, 'updated');
- } 
+ }
  public function userResponses()
  {
      return $this->hasOne(SurveyResponse::class)->where('user_id', auth()->id());
  }
-  
+
 }
 
 
-  
+
 

@@ -18,7 +18,7 @@
             data-page="1" data-max-pages="3">
             <div
                 class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xl-3">
-                @foreach ($videos as $videoList)
+                @foreach ($videoShearch as $videoList)
                     <div class="post-item  mb-4">
                         <article
                             class="post-134 video type-video status-publish has-post-thumbnail hentry categories-gaming video_tag-featured video_tag-game video_tag-ghost video_tag-tsushima pmpro-has-access"
@@ -31,7 +31,7 @@
                                 <div
                                     class="post-main position-relative rounded overflow-hidden">
                                     <a class="post-permalink" title="Ghost of Tsushima"
-                                        href="{{ route('videos.show', $videoList->id) }}">
+                                        href="{{ route('videos.show', $videoList->slug) }}">
                                         <div
                                             class="post-thumbnail ratio ratio-16x9 rounded overflow-hidden bg-dark">
                                             <video width="560" height="287"
@@ -49,6 +49,7 @@
                                             {{ $videoList->duree_minutes }}</div>
                                 </div>
                                 </a>
+
                             </div>
                             <div class="post-bottom mt-3 d-flex align-items-start">
                                 <div class="me-2">
@@ -58,10 +59,10 @@
                                                 data-bs-placement="right"
                                                 class="d-flex align-items-center fw-bold text-decoration-none"
                                                 title="Celina"
-                                                href="../../author/celina/index.html"><img
-                                                    alt
-                                                    src="../../wp-content/uploads/2021/08/avatar-11.jpg"
-                                                    srcset="https://streamtube.marstheme.com/wp-content/uploads/2021/08/avatar-11.jpg 2x"
+                                                href="#"><img
+                                                    alt="Khadime lo rafahi"
+                                                    src="/images/bg/xe/khadime.jpeg"
+                                                    srcset="/images/bg/xe/khadime.jpeg"
                                                     class="avatar avatar-200 photo img-thumbnail"
                                                     height="200" width="200"
                                                     loading="lazy"
@@ -87,14 +88,15 @@
                                         <div class="d-flex gap-3">
                                             <div class="post-meta__views">
                                                 <span class="icon-eye"></span>
-                                                12 views
+                                                {{ $videoList->views_count }} views
                                             </div>
                                             <div class="post-meta__date">
                                                 <span class="icon-calendar-empty"></span>
                                                 <a title="Ghost of Tsushima"
                                                     href="../EKQe1rjaJY/index.html">
-                                                    <time datetime="2021-08-19 02:36:35"
-                                                        class="date">2 years</time> ago
+                                                    <time datetime="{{ $videoList->created_at }}" class="date">
+                                                        {{ $videoList->created_at->diffForHumans() }}
+                                                    </time>
                                                 </a>
                                             </div>
                                         </div>

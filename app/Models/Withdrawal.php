@@ -15,6 +15,28 @@ class Withdrawal extends Model
         'user_id', // Clé étrangère vers l'utilisateur qui a effectué la demande
     ];
 
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'status',
+            ],
+        ];
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function getSlugOptions(): array
+    {
+        return [
+            'source' => 'status',
+        ];
+    }
+
+
     public function user()
     {
         return $this->belongsTo(User::class); // Relation avec l'utilisateur qui a effectué la demande
@@ -29,5 +51,5 @@ class Withdrawal extends Model
     {
         $this->update(['disabled' => true]);
     }
- 
+
 }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
-            $table->string('hashid')->nullable()->unique();
+            $table->string('slug')->unique()->after('id');
 
             $table->string('titre');
             $table->text('description');
@@ -40,7 +40,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('videos');
         Schema::table('videos', function (Blueprint $table) {
-            $table->dropColumn('hashid');
+            //
 
             $table->dropColumn('is_active');
         });

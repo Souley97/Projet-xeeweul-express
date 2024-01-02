@@ -28,19 +28,18 @@ class="site-header header-fw-1 d-flex align-items-center shadow-sm border-bottom
             </div>
             <div id="site-search" class="site-search search-form-wrap d-none d-lg-block">
 
-                <form action="{{route('videos.search')}}" class="search-form advanced-search d-flex" method="get">
+                <form action="{{ route('videos.liste') }}" method="GET" class="search-form advanced-search d-flex">
                     <button class="toggle-search btn btn-sm border-0 shadow-none d-block d-lg-none p-2"
                         type="button">
                         <span class="icon-left-open"></span>
                     </button>
                     <div class="input-group-wrap position-relative w-100">
 
-                        <input id="search-input"  x-data="{ query: '' }" x-model="query" @input="search"
-                            class="form-control shadow-none ps-4 search-input autocomplete" autocomplete="off"
-                            aria-label="Search" name="s" placeholder="Search here..." type="text"
-                            value>
-                        <input type="hidden" id="search-input"  x-data="{ query: '' }" x-model="query" @input="search" name="search">
-                        <input type="hidden" id="_wpnonce" name="_wpnonce" value="071ff67130" />
+                        <input id="search-input"
+                            class="form-control shadow-none ps-4 search-input "
+                             name="s"  placeholder="Search here..." type="text"
+                            >
+
                         <div class="advanced-search-filter dropdown w-100">
                             <button type="button" class="btn btn-advanced-search shadow-none p-0 m-0"
                                 id="advanced-search-toggle" data-bs-display="static"
@@ -55,6 +54,12 @@ class="site-header header-fw-1 d-flex align-items-center shadow-sm border-bottom
                         </button>
                     </div>
                 </form>
+             
+                {{-- recherche --}}
+                {{-- <form action="{{ route('videos.liste') }}" method="GET">
+                    <input type="text" name="search" class="border p-2" value="{{ $querye }}" placeholder="Rechercher par titre">
+                    <button type="submit" class="bg-blue-500 text-white p-2">Rechercher</button>
+                </form> --}}
             </div>
         </div>
         <div class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3 col-xxl-3">

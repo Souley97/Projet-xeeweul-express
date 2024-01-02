@@ -14,7 +14,6 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('hashid')->nullable()->unique();
 
             $table->string('name')->unique();
             $table->unsignedBigInteger('created_by')->nullable();
@@ -32,7 +31,7 @@ return new class extends Migration
         Schema::dropIfExists('roles');
 
         Schema::table('videos', function (Blueprint $table) {
-            $table->dropColumn('hashid');
+            //
         });
     }
 };

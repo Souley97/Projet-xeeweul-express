@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('role_user', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('roles_id');
-            
+
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
-    
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('roles_id')->references('id')->on('roles')->onDelete('cascade');
             $table->timestamps();
@@ -34,7 +35,7 @@ return new class extends Migration
         Schema::dropIfExists('role_user');
 
         Schema::table('videos', function (Blueprint $table) {
-            $table->dropColumn('hashid');
+            //
         });
     }
 };

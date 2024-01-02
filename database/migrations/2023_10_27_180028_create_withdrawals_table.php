@@ -13,21 +13,21 @@ return new class extends Migration
     {
         Schema::create('withdrawals', function (Blueprint $table) {
             $table->id();
-            $table->string('hashid')->nullable()->unique();
+            $table->string('slug')->unique()->after('id');
 
             $table->decimal('amount', 10, 2);
             $table->string('payment_method');
             $table->string('status');
             $table->boolean('disabled')->default(false);
 
-        
+
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
-    
+
 
     /**
      * Reverse the migrations.
@@ -37,7 +37,7 @@ return new class extends Migration
         Schema::dropIfExists('withdrawals');
 
         Schema::table('videos', function (Blueprint $table) {
-            $table->dropColumn('hashid');
+            //
         });
     }
 };

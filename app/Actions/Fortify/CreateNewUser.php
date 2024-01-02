@@ -33,6 +33,7 @@ class CreateNewUser implements CreatesNewUsers
             'points' => ['', 'integre'],
             'montant' => ['', 'integre'],
             'payment' => ['', 'string', 'max:20'],
+            'slug' => ['', 'array', 'max:30'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
 
@@ -43,6 +44,7 @@ class CreateNewUser implements CreatesNewUsers
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
+                'slug' => $input['name'],
                 'password' => Hash::make($input['password']),
                 'points' => 0,
                 'montant' => 100,

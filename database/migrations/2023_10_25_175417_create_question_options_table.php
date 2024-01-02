@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('question_options', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique()->after('id');
+            
             $table->unsignedBigInteger('question_id'); // Clé étrangère vers la table "questions" pour la question associée
             $table->string('texte_option'); // Texte de l'option de réponse
             $table->boolean('est_correcte')->default(false); // Indicateur d'option de réponse correcte
             $table->timestamps(); // Pour la date de création et de mise à jour automatique
-    
+
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
-    
+
 
     /**
      * Reverse the migrations.

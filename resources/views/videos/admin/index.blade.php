@@ -13,26 +13,36 @@
                     Ajouter une Video
                 </a>
             </div>
-
+            <div class="mb-4">
+                {{-- RECHERCHER --}}
+                <form action="{{ route('videos.index') }}" method="GET">
+                    <input type="text" name="search" class="border p-2" value="{{ $querye }}" placeholder="Rechercher par titre">
+                    <button type="submit" class="bg-blue-500 text-white p-2">Rechercher</button>
+                </form>
+            </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                @foreach ($videos as $video)
+
+                @foreach ($videoShearch as $video)
                     <div class="bg-white rounded-lg overflow-hidden shadow-md">
-                        <a href="{{ route('videos.show', $video->id) }}">
+                        <a href="{{ url('videos',  $video->slug) }}">
                             <video src="{{ asset('storage/videos/' . $video->chemin_vers_video) }}"
                                 alt="Video Thumbnail" class="w-full h-32 object-cover"></video>
                             <div class="p-4">
                                 <h3 class="text-xl font-semibold mb-2">{{ $video->titre }}</h3>
                                 <p class="text-gray-600">{{ $video->description }}</p>
+                                <p class="text-gray-500">Likes : {{ $video->likes_count }}</p>
+                                <p class="text-gray-500">Vues : {{ $video->views_count }}</p>
                                 <div class="mt-4 flex items-center">
                                     <span class="text-sm text-gray-500">Publié le
                                         {{ $video->created_at->format('d/m/Y') }}</span>
                                 </div>
-                                <a href="{{ route('videos.show', $video) }}"
-                                    class="text-indigo-600 hover:text-indigo-900">
-                                    <i class="fas fa-eye"></i> Voir
+                                <a href="{{ route('videos.show', $video->slug) }}"
+                                class="text-indigo-600 hover:text-indigo-900">
+                                    <i class="fas fa-eye"></i> {{ $video->titre }}
                                 </a>
+
                                 <div class="mt-4">
-                                    <a href="{{ route('videos.edit', $video->id) }}"
+                                    <a href="{{ route('videos.edit', $video->slug) }}"
                                         class="text-blue-500 hover:underline mr-4">Éditer</a>
                                     <form action="{{ route('videos.destroy', $video->id) }}" method="post"
                                         style="display: inline-block">
@@ -85,6 +95,30 @@
                     </div>
                 @endforeach
             </div>
+            <!-- videos/index.blade.php -->
+
+
+
+
+            {{-- <div class="mt-4">
+                <p>Trier par :</p>
+                <a href="{{ route('videos.index', ['order_by' => 'likes']) }}" class="underline mr-4">Likes</a>
+                <a href="{{ route('videos.index', ['order_by' => 'views']) }}" class="underline">Vues</a>
+            </div>
+            <!-- Exemple dans la vue -->
+<h2>Liste des vidéos triées par {{ request('order_by') === 'likes' ? 'Likes' : 'Vues' }} :</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    @foreach ($videosLikeOrView as $video)
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold">{{ $video->title }}</h3>
+            <p class="text-gray-500">Description : {{ $video->description }}</p>
+            <p class="text-gray-500">Likes : {{ $video->likes_count }}</p>
+            <p class="text-gray-500">Vues : {{ $video->views_count }}</p>
+        </div>
+    @endforeach
+</div> --}}
+
             {{-- liste
             <h2>Liste des utilisateurs :</h2>
 @foreach ($users as $user)

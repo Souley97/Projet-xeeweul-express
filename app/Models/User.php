@@ -11,6 +11,8 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Vinkla\Hashids\Facades\Hashids;
+use Cviebrock\EloquentSluggable\Sluggable;
+
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -22,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -51,19 +54,52 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
     //pour Authrisation Des page par SuperAdmin et Admin
 
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+            ],
+        ];
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function getSlugOptions(): array
+    {
+        return [
+            'source' => 'name',
+        ];
+    }
+
+
+
+    public function favoriteVideos()
+    {
+        return $this->belongsToMany(Video::class, 'user_favorite_videos', 'user_id', 'video_id')->withTimestamps();
+    }
+    //pour Authrisation Des page par SuperAdmin , Admdin
 
     public function hasAnyRole(array $role){
         return $this->roles()->whereIn('name', $role)->first();
     }
-    //pour Authrisation Des page par SuperAdmin , Admdin , Mentors et Junior
+    //pour Authrisation Des page par SuperAdmin , Admdin , User
     public function hasAllRole(array $role){
         return $this->roles()->whereIn('name', $role)->first();
     }
+    //pour Authrisation Des page par  Admdin
 
     public function hasAdminRole(array $role){
         return $this->roles()->whereIn('name', $role)->first();
+    }    //pour Authrisation Des page par SuperAdmin
+
+    public function hasSuperAdminRole(array $role){
+        return $this->roles()->whereIn('name', $role)->first();
     }
-    //pour Authrisation Des page par Mentors et Junior
+    //pour Authrisation Des page par User
     public function isUser($role){
        return $this->roles()->whereIn('name',$role)->first();
     }
@@ -71,7 +107,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->roles->contains('name', $role);
     }
-    // app/Models/User.php
+    // Fin Roles
 
     use HasTeams;
 

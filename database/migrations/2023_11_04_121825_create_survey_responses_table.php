@@ -9,14 +9,13 @@ class CreateSurveyResponsesTable extends Migration
     {
         Schema::create('survey_responses', function (Blueprint $table) {
             $table->id();
-            $table->string('hashid')->nullable()->unique();
+            $table->string('slug')->unique()->after('id');
 
-     
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('option_id');
             $table->timestamps();
-            
+
             // Ajoutez des clés étrangères
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('question_id')->references('id')->on('questions');
@@ -29,7 +28,7 @@ class CreateSurveyResponsesTable extends Migration
         Schema::dropIfExists('survey_responses');
 
         Schema::table('videos', function (Blueprint $table) {
-            $table->dropColumn('hashid');
+            //
         });
     }
 }

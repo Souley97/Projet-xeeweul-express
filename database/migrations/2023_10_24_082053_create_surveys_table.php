@@ -11,7 +11,7 @@ class CreateSurveysTable extends Migration
     {
         Schema::create('surveys', function (Blueprint $table) {
             $table->id();
-            $table->string('hashid')->nullable()->unique();
+        $table->string('slug')->unique()->after('id');
 
             $table->string('titre');
             $table->text('description');
@@ -32,7 +32,7 @@ class CreateSurveysTable extends Migration
         Schema::dropIfExists('surveys');
 
         Schema::table('videos', function (Blueprint $table) {
-            $table->dropColumn('hashid');
+            //
         });
 }
 }

@@ -38,6 +38,7 @@ class UserTableSeeder extends Seeder
             'phone' => 766657278,
             'points' => 10,
             'payment' => 'Wave',
+            'slug' => 'JulinoNdiaye',
         ]);
 
         $user = User::create([
@@ -48,6 +49,8 @@ class UserTableSeeder extends Seeder
             'phone' => 766666666,
             'points' => 10,
             'payment' => 'Wave',
+            'slug' => 'Julio',
+
         ]);
 
         // $superAdminRole = Roles::where('name', 'SuperAdmin')->first();

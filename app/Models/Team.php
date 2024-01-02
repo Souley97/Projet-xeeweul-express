@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Jetstream\Events\TeamCreated;
@@ -11,7 +12,7 @@ use Laravel\Jetstream\Team as JetstreamTeam;
 class Team extends JetstreamTeam
 {
     use HasFactory;
-
+    use Sluggable;
     /**
      * The attributes that should be cast.
      *
@@ -20,6 +21,28 @@ class Team extends JetstreamTeam
     protected $casts = [
         'personal_team' => 'boolean',
     ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+            ],
+        ];
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    public function getSlugOptions(): array
+    {
+        return [
+            'source' => 'name',
+        ];
+    }
+
 
     /**
      * The attributes that are mass assignable.

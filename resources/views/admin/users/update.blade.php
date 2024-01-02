@@ -1,5 +1,5 @@
 <x-app-layout>
-    @if (Auth::user()->is_admin)
+
     <div class="container mx-auto p-4">
 
 
@@ -31,6 +31,8 @@
                 </div>
             </div>
             <h2 class="text-2xl font-semibold mb-4">Mise à Jour de l'Utilisateur</h2>
+            @can('manage-users', Auth::user())
+
             <form method="post" action="{{ route('admin.updateRole', ['userId' => $user->id]) }}">
                 @csrf
                 @method('put')
@@ -82,8 +84,9 @@
                         </label></button>
                 </form>
             @endif
+            @endcan
         </div>
     </div>
-    @endif
+
 
 </x-app-layout>

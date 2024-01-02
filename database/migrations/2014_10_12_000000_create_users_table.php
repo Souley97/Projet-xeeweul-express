@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('hashid')->nullable()->unique();
+                      $table->string('slug')->unique()->after('id');
 
 
             $table->string('name')->unique();
@@ -53,7 +53,7 @@ return new class extends Migration
             $table->dropColumn('is_admin');
             $table->dropColumn('is_active');
 
-            $table->dropColumn('hashid');
+            //
         });
     }
 };

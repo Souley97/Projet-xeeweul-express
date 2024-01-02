@@ -1,5 +1,5 @@
 <x-app-layout>
-   
+
     <div class="container w-full h-96 py-6">
         <div class="flex justify-between items-center">
             <h2 class="text-2xl font-semibold">{{ $survey->titre }}</h2>
@@ -19,8 +19,8 @@
                     <h3 class="text-lg font-semibold">
                               <h2 class="text-lg font-semibold mb-2">Questions :</h2>
                         {{ $question->texte }}
-                        
-                      
+
+
                     </h3>
                     <div class="mt-4">
                         @if ($question && count($question->reponses) > 0)
@@ -31,9 +31,10 @@
                                         <li
                                             class=" hover:shadow-lg hover:scale-x-125 transition-transform duration-300 ease-in-out flex border-1 mt-3 bg-slate-100  bold text-sm shadow-md rounded-sm mb-2">
                                             @if ($option->is_correct and Auth::user()->is_admin==1)
-                                                <span class="fab fa-facebook text-green-500  bg-green-400 mr-2"></span>
-                                            @else
-                                                <i class="fas fa-times-circle text-red-500 bg-red-400 mr-2"></i>
+                                                <i class="fa fa-check-circle-o text-green-500  mr-2" aria-hidden="true"></i>
+
+                                                @else
+                                                <i class="fas fa-times-circle text-red-500  mr-2"></i>
                                             @endif
                                             <span>{{ $option->reponses }}</span>
                                         </li>
@@ -80,5 +81,5 @@
             @endif
         </div>
     </div> --}}
-    
+
 </x-app-layout>

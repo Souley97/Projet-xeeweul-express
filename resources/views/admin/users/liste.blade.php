@@ -20,11 +20,11 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->points }}</td>
                         <td>
-                            <a href="{{ route('users.show', $user->id ) }}" class="text-blue-500 mr-2">Voir</a>
-                            <a href="{{ route('users.edit', $user->id) }}" class="text-green-500 mr-2">Éditer</a>
-                            <a href="{{ route('admin.editRole', ['userId' => $user->id]) }}" class="text-green-500 mr-2"    >Modifier le rôle</a>
+                            <a href="{{ route('users.show', $user->slug ) }}" class="text-blue-500 mr-2">Voir</a>
+                            <a href="{{ route('users.edit', $user->slug) }}" class="text-green-500 mr-2">Éditer</a>
+                            <a href="{{ route('admin.editRole', ['userId' => $user->slug]) }}" class="text-green-500 mr-2"    >Modifier le rôle</a>
 
-                            <button class="text-red-500 delete-user" data-id="{{ $user->id }}">Supprimer</button>
+                            <button class="text-red-500 delete-user" data-id="{{ $user->slug }}">Supprimer</button>
                         </td>
                     </tr>
                 @endforeach

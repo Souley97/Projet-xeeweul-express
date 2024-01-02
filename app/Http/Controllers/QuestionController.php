@@ -18,20 +18,20 @@ class QuestionController extends Controller
         return view('admin.questions.index', compact('questions'));
     }
 
-  
 
-    
+
+
     public function create()
     {
         // if (Gate::denies('manage-users')) {
         //     return redirect(route('dashboard'));
         // };
         $surveys = Survey::all();
-        
+
 
         return view('admin.questions.create', compact('surveys'));
     }
- 
+
     public function store(Request $request)
     {
         // if (Gate::denies('manage-users')) {
@@ -75,14 +75,14 @@ class QuestionController extends Controller
         return redirect()->route('questions.index')->with('success', 'Question créée avec succès.');
     }
 
-    public function show($id)
+    public function show($slug)
     {
         // Charger la question depuis la base de données en fonction de l'ID
-        $question = Question::findOrFail($id);
+        $question = Question::findOrFail($slug);
         $surveys = Survey::all();
 
         if ($question) {
-            return view('admin.questions.show', ['question' => $question]);
+            return view('admin.questions.show', ['question' => $question , 'surveys' => $surveys]);
         } else {
             // Gérer le cas où la question n'existe pas
             return redirect()->route('admin.questions.index')->with('error', 'Question non trouvée.');
