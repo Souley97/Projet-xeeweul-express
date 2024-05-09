@@ -1,4 +1,4 @@
-@if (Auth::user()->is_admin == 1)<x-app-layout>
+@can('manage-users',Auth::user())<x-app-layout>
 
         <!-- resources/views/videos/index.blade.php -->
 
@@ -28,31 +28,27 @@
                             <video src="{{ asset('storage/videos/' . $video->chemin_vers_video) }}"
                                 alt="Video Thumbnail" class="w-full h-32 object-cover"></video>
                             <div class="p-4">
-                                <h3 class="text-xl font-semibold mb-2">{{ $video->titre }}</h3>
-                                <p class="text-gray-600">{{ $video->description }}</p>
-                                <p class="text-gray-500">Likes : {{ $video->likes_count }}</p>
-                                <p class="text-gray-500">Vues : {{ $video->views_count }}</p>
+                                <h3 class="text-xl font-semibold mb-2  hover:text-red-200">{{ $video->titre }}</h3>
+                                <p class="text-gray-500"><i class="fa-regular fa-thumbs-up"></i> {{ $video->likes_count }} <i class="fas fa-eye pl-20"></i> {{ $video->views_count }}</p>
                                 <div class="mt-4 flex items-center">
-                                    <span class="text-sm text-gray-500">Publié le
+                                    <span class="text-sm text-gray-500"><i class="fa-solid fa-upload"></i>
                                         {{ $video->created_at->format('d/m/Y') }}</span>
                                 </div>
-                                <a href="{{ route('videos.show', $video->slug) }}"
-                                class="text-indigo-600 hover:text-indigo-900">
-                                    <i class="fas fa-eye"></i> {{ $video->titre }}
-                                </a>
 
-                                <div class="mt-4">
-                                    <a href="{{ route('videos.edit', $video->slug) }}"
-                                        class="text-blue-500 hover:underline mr-4">Éditer</a>
+
+
+                                <div class="mt-4 mp-4">
+                                    <a class="text-sm" href="{{ route('videos.edit', $video->slug) }}"
+                                        class="text-blue-500 hover:underline mr-4"><i class="fa-regular fa-pen-to-square   w-28"></i></a>
                                     <form action="{{ route('videos.destroy', $video->id) }}" method="post"
                                         style="display: inline-block">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-500 hover:underline"
-                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vidéo?')">Supprimer</button>
+                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vidéo?')"><i class="fa-solid fa-trash" style="color: #ff1f1f;"></i></button>
                                     </form>
 
-                                    <div class="left-56  relative  ">
+                                    <div class="left-56    ">
                                         @if ($video->is_active)
                                             <form action="{{ route('videos.deactivate', $video->id) }}" method="post">
                                                 @csrf
@@ -139,4 +135,4 @@
 
 
     </x-app-layout>
-@endif
+@endcan

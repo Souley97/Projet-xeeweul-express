@@ -21,7 +21,6 @@
         }
 
         /* Add underline or any other styling for active link */
-
     </style>
     <link rel="icon" href="/images/bg/xe/logo.png">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -67,7 +66,7 @@
                             </span>
                             <div class="text-menu">Quiz</div>
                         </a>
-                        @if (Auth::user()->is_admin == 1)
+                        @can('manage-users', Auth::user()->is_admin)
                             <a href="{{ Route('users.index') }}" class="{{ request()->is('users*') ? 'active' : '' }}">
                                 <span class="">
                                     <i class="fa-solid fa-user"></i>
@@ -80,7 +79,7 @@
                                 <div class="text-menu">Dashboard</div>
                             </a>
                             <a href="{{ Route('questions.index') }}"
-                                class="{{ request()->is('questions*','question/create*') ? 'active' : '' }}">
+                                class="{{ request()->is('questions*', 'question/create*') ? 'active' : '' }}">
                                 <span class="">
                                     <i class="fa-regular fa-question"></i>
                                 </span>
@@ -100,19 +99,26 @@
                                     <i class="fa-solid fa-people-group"></i> </span>
                                 <div class="text-menu">Parraeinage</div>
                             </a>
+                            <a href="{{ route('subscription.plans')}}"
+                                class="{{ request()->is('subscription*') ? 'active' : '' }}">
+                                <span class="">
+                                    <i class="fa-solid fa-people-group"></i> </span>
+                                <div class="text-menu">Abonnement</div>
+                            </a>
                             <a href="{{ route('videos.index') }}" class="{{ request()->is('videos*') ? 'active' : '' }}">
                                 <span class="">
                                     <i class="fa-brands fa-youtube"></i> </span>
                                 <div class="text-menu">Video</div>
                             </a>
 
-                            <a href="{{ route('roles.index') }}"
-                                class="{{ request()->is('setting/role*') ? 'active' : '' }}">
+                            <a href="{{ route('roles.index') }}" class="{{ request()->is('setting/role*') ? 'active' : '' }}">
                                 <span class="">
                                     <i class="fa-solid fa-gears"></i> </span>
                                 <div class="text-menu">Settings</div>
                             </a>
-                        @elseif (Auth::user()->is_admin == 0)
+                        @endcan
+
+                        @can('users', Auth::user())
                             <a href="{{ route('users.show', Auth::user()->id) }}"
                                 class="{{ request()->is('users*') ? 'active' : '' }}">
                                 <span class="">
@@ -127,12 +133,13 @@
                                 </span>
                                 <div class="text-menu">Video</div>
                             </a>
-                            <a href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"  class="{{ request()->is('teams/*') ? 'active':'' }}">
-                            <span class="">
-                                <i class="fa-solid fa-people-group"></i> </span>
-                            <div class="text-menu">Parraeinage</div>
+                            <a href="{{ route('teams.show', Auth::user()->currentTeam->id) }}"
+                                class="{{ request()->is('teams/*') ? 'active' : '' }}">
+                                <span class="">
+                                    <i class="fa-solid fa-people-group"></i> </span>
+                                <div class="text-menu">Parraeinage</div>
                             </a>
-                        @endif
+                        @endcan
                     @endauth
                 @endif
 

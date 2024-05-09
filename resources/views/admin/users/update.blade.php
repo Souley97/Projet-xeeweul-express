@@ -41,7 +41,7 @@
                 <select name="role" id="role">
                     <option value="User" {{ $user->hasRole('User') ? 'selected' : '' }}>Utilisateur</option>
                     <option value="Admin" {{ $user->hasRole('Admin') ? 'selected' : '' }}>Administrateur</option>
-                    <option value="SuperAdmin" {{ $user->hasRole('SuperAdmin') ? 'selected' : '' }}>Super Administrateur
+                    {{-- <option value="SuperAdmin" {{ $user->hasRole('SuperAdmin') ? 'selected' : '' }}>Super Administrateur --}}
                     </option>
                 </select>
 

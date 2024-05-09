@@ -98,8 +98,17 @@ foreach ($videos as $video) {
     $video = Video::where('slug',$slug)->first();
     $hashVideo = Video::where('slug',$slug)->first();
 
-    // Incrémentez le nombre de vues (si vous avez cette fonctionnalité)
-    $video->increment('views_count');
+       // Vérifiez si l'utilisateur a déjà vu cette vidéo
+       $userHasViewed = $request->session()->has('viewed_videos.' . $video->id);
+
+       // Si l'utilisateur n'a pas encore vu la vidéo, incrémentez le nombre de vues
+       if (!$userHasViewed) {
+           $video->increment('views_count');
+
+           // Enregistrez dans la session que l'utilisateur a vu cette vidéo
+           $request->session()->put('viewed_videos.' . $video->id, true);
+       }
+
 
     // Chargez les likes pour cette vidéo
     $video->load('likes');

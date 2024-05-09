@@ -54,12 +54,8 @@ class="site-header header-fw-1 d-flex align-items-center shadow-sm border-bottom
                         </button>
                     </div>
                 </form>
-             
-                {{-- recherche --}}
-                {{-- <form action="{{ route('videos.liste') }}" method="GET">
-                    <input type="text" name="search" class="border p-2" value="{{ $querye }}" placeholder="Rechercher par titre">
-                    <button type="submit" class="bg-blue-500 text-white p-2">Rechercher</button>
-                </form> --}}
+
+
             </div>
         </div>
         <div class="col-4 col-sm-4 col-md-4 col-lg-3 col-xl-3 col-xxl-3">
@@ -77,7 +73,7 @@ class="site-header header-fw-1 d-flex align-items-center shadow-sm border-bottom
                                 <span class="btn__icon centerxy icon-cart-plus"></span>
                                 <span class="position-absolute cart-count">
                                     <span class="badge bg-danger">
-                                        10 </span>
+                                        0 </span>
                                 </span>
                             </button>
                             <div
@@ -91,7 +87,7 @@ class="site-header header-fw-1 d-flex align-items-center shadow-sm border-bottom
                     </div>
                     <div class="header-user__dropdown ms-0 ms-lg-3">
                         <a class="btn btn-login px-lg-3 d-flex align-items-center btn-sm"
-                            href="../../wp-login.html">
+                            href="#">
                             <span class="btn__icon icon-user-circle"></span>
                             <span class="btn__text text-white d-lg-block d-none ms-2">Sign In</span>
                         </a>
@@ -108,32 +104,3 @@ class="site-header header-fw-1 d-flex align-items-center shadow-sm border-bottom
 </div>
 </header>
 
-  <script>
-        function search() {
-            // Code de recherche à implémenter ici
-            // Utilisez Ajax pour interroger le serveur Laravel et récupérer les résultats de la recherche
-            // Mettez à jour la variable Alpine.js 'results' avec les résultats
-        }
-
-        // Initialisation d'Alpine.js
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('index', () => ({
-                query: '',
-                results: [],
-                search: debounce(search, 500),
-            }));
-
-            // Fonction debounce pour éviter les appels excessifs pendant la saisie
-            function debounce(func, delay) {
-                let timeout;
-                return function () {
-                    const context = this;
-                    const args = arguments;
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => {
-                        func.apply(context, args);
-                    }, delay);
-                };
-            }
-        });
-    </script>

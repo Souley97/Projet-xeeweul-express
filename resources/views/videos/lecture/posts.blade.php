@@ -27,19 +27,7 @@
                                         {{ $video->views_count }} views
                                     </div>
                                 </div>
-                                {{-- <form action="{{ route('videos.favorite', $video) }}" method="post">
-                                    @csrf
-                                    <button type="submit"
-                                            class="flex items-center space-x-2 {{ auth()->user()->favoriteVideos->contains($video) ? 'text-red-500' : 'text-gray-500' }}">
-                                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                             viewBox="0 0 24 24" class="w-6 h-6">
-                                            <path
-                                                d="M5 3c0-1.107.893-2 2-2s2 .893 2 2s-2 .908-2 2c0 1.52 1.474 2.893 3 3.917c1.526-1.024 3-2.397 3-3.917c0-1.107.893-2 2-2s2 .893 2 2s-2 .908-2 2c0 2.21-1.79 4-4 4s-4-1.79-4-4s-1.79-4-4-4s-4 1.79-4 4s-1.79 4-4 4s-3-1.79-3-4s1.34-4 3-4s3 1.79 3 4z">
-                                            </path>
-                                        </svg>
-                                        <span>Add to Favorites</span>
-                                    </button>
-                                </form> --}}
+                                
 
 
                                 <span class="post-meta__icon icon-chat-empty"></span>
@@ -52,16 +40,15 @@
                                     class="text-secondary icon-lightbulb"></span>
                             </button>
                             <button id="btn-up-next" class="btn p-1 rounded-1 bg-light border btn-upnext "
-                                title="Turn on Up Next" data-on-title="Turn on Up Next"
-                                data-off-title="Turn off Up Next"> <span class="text-secondary icon-toggle-off"></span>
+                                title="Turn on Up Next" "> <span class="text-secondary icon-toggle-off"></span>
                             </button>
                             <div class="next-prev-nav d-flex gap-2">
                                 <a id="previous-post-link" class="btn p-1 rounded-1 bg-light border"
-                                    href="../WjnegJYdwZ/index.html" title="Just Cause 3 Gameplay Trailer"> <span
+                                    href="#" title="Just Cause 3 Gameplay Trailer"> <span
                                         class="text-secondary icon-left-open"></span>
                                 </a>
                                 <a id="next-post-link" class="btn p-1 rounded-1 bg-light border"
-                                    href="../yMYerkEaOB/index.html" title="Exploring Witcher 3&#039;s Open World"> <span
+                                    href="#" title="Exploring Witcher 3&#039;s Open World"> <span
                                         class="text-secondary icon-right-open"></span>
                                 </a>
                             </div>
@@ -104,14 +91,9 @@
                                             data-bs-toggle="modal" data-bs-target="#modal-login"> <span
                                                 class="btn__icon"><span class="icon-thumbs-down"></span></span>
                                             <span class="btn__badge badge bg-secondary position-absolute">
-                                                1 </span>
+                                                0 </span>
                                         </button>
-                                        <input type="hidden" name="action" value="post_like">
-                                        <input type="hidden" name="do_action" value="dislike">
-                                        <input type="hidden" name="post_id" value="51">
-                                        <input type="hidden" name="nonce" value="1ea413ba56"> <input type="hidden"
-                                            name="request_url"
-                                            value="https://streamtube.marstheme.com/wp-json/wp-post-like/v1/like">
+
                                     </form>
                                 </div>
                             </div>
@@ -173,19 +155,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="button-donate-wrap ms-auto">
+                    {{-- <div class="button-donate-wrap ms-auto">
                         <div class="button-group">
                             <button
                                 class="btn btn-sm btn-danger px-4 shadow-none d-flex align-items-center justify-content-center gap-1 d-block w-100"
                                 data-bs-toggle="modal" data-bs-target="#modal-login">
                                 <span class="btn__icon text-white icon-dollar"></span>
                                 <span class="btn__text text-white">
-                                    Donate </span>
+                                    XS </span>
                             </button>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
-                <div class="post-bottom__content p-4">
+                {{-- <div class="post-bottom__content p-2">
                     <div class="post-content">
                         <div class="js-read-wrap">
                             <div class="js-read">
@@ -206,7 +188,7 @@
 
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </article>

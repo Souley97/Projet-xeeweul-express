@@ -13,13 +13,27 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('name','User');
+        })->paginate(10); // Remplacez le nombre 10 par le nombre d'utilisateurs que vous souhaitez afficher par page
+
         $surveys = Survey::all();
-        $users = User::paginate(8);
 
-
-        return view('admin.users.index', compact('users','surveys'));
+        return view('admin.users.index', compact('users', 'surveys'));
     }
+
+    public function listeAdmins()
+    {
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('name', 'Admin');
+        })->paginate(10); // Remplacez le nombre 10 par le nombre d'utilisateurs que vous souhaitez afficher par page
+
+        $surveys = Survey::all();
+
+        return view('admin.users.liste-admin', compact('users', 'surveys'));
+    }
+
+
 
     // App\Http\Controllers\AdminController.php
 
@@ -63,7 +77,7 @@ public function edit($slug)
 }
 
 
-public function destroy($id)
+    public function destroy($id)
 {
     $user = User::find($id);
 

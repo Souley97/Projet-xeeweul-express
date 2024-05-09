@@ -90,19 +90,28 @@ https://templatemo.com/tm-587-tiya-golf-club
                             </li>
                         </ul>
                         @if (Route::has('login'))
-                            <div class=" d-lg-block ms-lg-3">
-                                @auth
-                                    <a href="{{ url('/dashboard') }}" class="btn custom-btn custom-border-btn font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                                @else
-                                       {{-- <a class="btn custom-btn text-blue-800 bg-blue-700 text-start custom-border-btn" data-bs-toggle="offcanvas" href="{{route('login')}}" role="button">Member Login</a> --}}
-                                       <a class="btn custom-btn text-blue-800 bg-blue-700 text-start custom-border-btn"  href="{{route('login')}}">Member Login</a>
-                                    @if (Route::has('register'))
-                                       <a class="btn custom-btn custom-border-btn" data-bs-toggle="offcanvas" href="{{route('register')}}" role="button" >Incription</a>
-                                    @endif
-                                @endauth
-                            </div>
+                        <div class=" d-lg-block ms-lg-3">
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="btn custom-btn custom-border-btn font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                                <a href="#">
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
 
-                        @endif
+                                        <button wire:click="logoutUser"  class="btn custom-btn custom-border-btn font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </a>
+                                @else
+                                   {{-- <a class="btn custom-btn text-blue-800 bg-blue-700 text-start custom-border-btn" data-bs-toggle="offcanvas" href="{{route('login')}}" role="button">Member Login</a> --}}
+                                   <a class="btn custom-btn text-blue-800 bg-blue-700 text-start custom-border-btn"  href="{{route('login')}}">Member Login</a>
+                                @if (Route::has('register'))
+                                   <a class="btn custom-btn custom-border-btn" data-bs-toggle="offcanvas" href="{{route('register')}}" role="button" >Incription</a>
+                                @endif
+                            @endauth
+                        </div>
+
+                    @endif
 
 
                             {{-- <a class="btn custom-btn custom-border-btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Member Login</a> --}}

@@ -5,7 +5,7 @@
         <div class="widget-title-wrap">
             <h2 class="widget-title d-flex align-items-center"> Xam Xam </h2>
         </div>
-        <div class="  post-grid post-grid-light post-grid-grid post-grid-avatar post-grid-avatar-size-md" >
+        <div class="  post-grid post-grid-light post-grid-grid post-grid-avatar post-grid-avatar-size-md" data-page="1" data-max-pages="3">
             <div class=" row  row-cols-sm-3 row-cols-md-3 row-cols-xl-3">
                 @foreach ($videoShearch as $videoList)
                     <div class="post-item  mb-4n">

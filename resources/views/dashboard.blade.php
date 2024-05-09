@@ -1,8 +1,8 @@
 <x-app-layout>
    <!-- New Users Section -->
    @if( Auth::user()->is_admin==1)
-    
-   
+
+
    <div class="new-users">
     <h2>Mes Parraines</h2>
     <div class="user-list">
@@ -13,15 +13,15 @@
             <p>{{$user->email}}</p>
         </div>
         @endforeach
-     
+
         <div class="user">
             <img src="/images/bg/images/xe/te.jpeg">
             <h2>Souleymane</h2>
             <p>souley@bd.co</p>
         </div>
 
-     
-        
+
+
         {{-- <form action="{{ route('referral.generate') }}" method="post">
         <button wire:click="generateReferralCode">Générer un nouveau code</button>
         </form> --}}
