@@ -12,11 +12,15 @@ return new class extends Migration {
     {
         Schema::create('subscription_plans', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique()->after('id');
+
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2);
             $table->string('interval')->default('month');
             $table->unsignedInteger('trial_period_days')->nullable();
+
+            $table->boolean('is_active')->default(true);
 
             $table->timestamps();
         });

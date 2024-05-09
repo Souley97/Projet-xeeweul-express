@@ -1,5 +1,47 @@
 <x-app-layout>
     <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Modifier le plan d'abonnement</div>
+
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('subscription-plans.update', $subscriptionPlan->id) }}">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="form-group">
+                                <label for="name">Nom du plan</label>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ $subscriptionPlan->name }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description du plan</label>
+                                <textarea class="form-control" id="description" name="description" required>{{ $subscriptionPlan->description }}</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="price">Prix (en dollars)</label>
+                                <input type="number" class="form-control" id="price" name="price" value="{{ $subscriptionPlan->price }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="trial_period_days">Période d'essai (en jours)</label>
+                                <input type="number" class="form-control" id="trial_period_days" name="trial_period_days" value="{{ $subscriptionPlan->trial_period_days }}">
+                            </div>
+
+                            <!-- Ajoutez d'autres champs au besoin -->
+
+                            <button type="submit" class="btn btn-primary">Modifier le plan d'abonnement</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
+<x-app-layout>
+    <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card">
@@ -14,7 +56,7 @@
                                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                         <label
                                             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="name">
+                                            for="name  value="{{ $subscriptionPlan->name }}
                                             Nom du plan
                                         </label>
                                         <input
@@ -31,7 +73,7 @@
 
                                         <input name="description" id="description"
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                            type="text" placeholder="Description" >
+                                            type="text" placeholder="Description" value=">{{ $subscriptionPlan->description }}" >
                                             @error('description')
                                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                                         @enderror
@@ -45,7 +87,7 @@
 
                                 <input type="number" name="price" id="price"
                                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="2000"
-                                    >
+                                    value="{{ $subscriptionPlan->price }}" >
 
                                     @error('price')
                                     <p class="text-red-500 text-xs italic">{{ $message }}</p>
@@ -59,7 +101,7 @@
 
                                         <input type="number" id="trial_period_days" name="trial_period_days"
                                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="3"
-                                            >
+                                         value="{{ $subscriptionPlan->trial_period_days }}"    >
                                             @error('trial_period_days')
                                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                                         @enderror

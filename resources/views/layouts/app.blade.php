@@ -99,7 +99,7 @@
                                     <i class="fa-solid fa-people-group"></i> </span>
                                 <div class="text-menu">Parraeinage</div>
                             </a>
-                            <a href="{{ route('subscription.plans')}}"
+                            <a href="{{ route('subscription-plans.index')}}"
                                 class="{{ request()->is('subscription*') ? 'active' : '' }}">
                                 <span class="">
                                     <i class="fa-solid fa-people-group"></i> </span>

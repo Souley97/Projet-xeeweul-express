@@ -2,13 +2,13 @@
     <div class="container w-full h-96 py-6">
         <div class="flex justify-between items-center">
             <h2 class="text-2xl font-semibold">Liste des Sondages</h2>
-            @can ('manage_user',Auth::user()->is_admin)
+            {{-- @can ('manage_user',Auth::user()->is_admin) --}}
 
 
             <a href="{{ route('surveys.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105 duration-300 ease-in-out">
                 Créer un sondage
             </a>
-            @endcan
+            {{-- @endcan --}}
         </div>
 
         <div class="grid grid-cols-3 md:grid-cols-7 lg:grid-cols-3 gap-3 mt-6">

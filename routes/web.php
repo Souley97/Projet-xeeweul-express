@@ -84,7 +84,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/user/search', [UserController::class, 'search'])->name('videos.search');
 });
 
-    Route::middleware(['can:all-users'])->group(function () {
+Route::middleware(['can:all-users'])->group(function () {
 
 
 
@@ -162,6 +162,20 @@ Route::middleware(['can:manage-users'])->group(function () {
 
     Route::get('/subscription-plans/create', [SubscriptionPlanController::class, 'create'])->name('subscription-plans.create');
     Route::post('/subscription-plans', [SubscriptionPlanController::class, 'store'])->name('subscription-plans.store');
+
+
+
+
+    Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionPlans'])->name('subscription-plans.index');
+    Route::post('/subscribe/{plan}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+
+    Route::get('subscription-plans/{slug}/edit', [SubscriptionPlanController::class, 'edit'])->name('subscription-plans.edit');
+    Route::put('subscription-plans/{slug}', [SubscriptionPlanController::class, 'update'])->name('subscription-plans.update');
+
+    Route::delete('/subscription-plans/{id}', [SubscriptionPlanController::class, 'destroy'])->name('subscription-plans.destroy');
+// Active et desactiveve
+Route::put('/subscription-plans/{slug}/activate', [SubscriptionPlanController::class, 'activate'])->name('subscription-plans.activate');
+Route::put('/subscription-plans/{slug}/deactivate', [SubscriptionPlanController::class, 'deactivate'])->name('subscription-plans.deactivate');
 
 });
 
@@ -243,8 +257,6 @@ Route::delete('/annoces/{annoce}', [AnnoceController::class, 'destroy'])->name('
 
 
 
-Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionPlans'])->name('subscription.plans');
-Route::post('/subscribe/{plan}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
 // Route::middleware(['auth'])->group(function () {
 //     // Route pour générer un code de parrainage
 //     Route::post('/generate-referral', [ReferralCodeGenerator::class, 'generateReferralCode'])->name('referral.generate');

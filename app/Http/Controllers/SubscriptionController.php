@@ -11,7 +11,7 @@ class SubscriptionController extends Controller
     public function showSubscriptionPlans()
     {
         $plans = SubscriptionPlan::all();
-        return view('subscription.plans', compact('plans'));
+        return view('subscription.index', compact('plans'));
     }
 
     public function subscribe(Request $request, SubscriptionPlan $plan)

@@ -29,4 +29,7 @@ class Subscriptions extends Model
     {
         return $this->belongsTo(SubscriptionPlan::class);
     }
+
+  
+
 }
