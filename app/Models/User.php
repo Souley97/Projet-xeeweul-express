@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -172,6 +172,26 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Roles::class);
     }
 
+    /**
+     * Vérifier si l'utilisateur est abonné à un plan spécifique.
+     *
+     * @param int $planId L'ID du plan d'abonnement.
+     * @return bool
+     */
+    public function subscribedToPlan($planId)
+    {
+        return $this->subscriptions()->where('subscription_plan_id', $planId)->exists();
+    }
+
+    /**
+     * Relation avec les abonnements de l'utilisateur.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscriptions::class);
+    }
 
 }
 

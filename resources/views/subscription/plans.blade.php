@@ -50,7 +50,10 @@
                                     </button>
                                 </form>
 
-
+                                <form action="{{ route('subscribe', $plan) }}" method="post">
+                                    @csrf
+                                    <button type="submit">S'abonner</button>
+                                </form>
                                 <div class="left-56    ">
                                     @if ($plan->is_active)
                                         <form action="{{ route('subscription-plans.deactivate', $plan->id) }}" method="post">

@@ -166,9 +166,11 @@ Route::middleware(['can:manage-users'])->group(function () {
 
 
 
-    Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionPlans'])->name('subscription-plans.index');
-    Route::post('/subscribe/{plan}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+    Route::get('/subscribess', [SubscriptionController::class, 'showSubscriptionPlans'])->name('subscription-plans.index');
+    // Route::post('/subscribde/{plan}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
 
+
+    Route::get('subscription-plans/{slug}/edit', [SubscriptionPlanController::class, 'index'])->name('subscription-plans.index');
     Route::get('subscription-plans/{slug}/edit', [SubscriptionPlanController::class, 'edit'])->name('subscription-plans.edit');
     Route::put('subscription-plans/{slug}', [SubscriptionPlanController::class, 'update'])->name('subscription-plans.update');
 
@@ -180,7 +182,8 @@ Route::put('/subscription-plans/{slug}/deactivate', [SubscriptionPlanController:
 });
 
 // Route::middleware(['can:manage-users'])->group(function () {
-
+    Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionPlans'])->name('subscription.plans');
+    Route::post('/subscribe/{plan}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
 
 // Route pour afficher la liste des niveaux d'utilisateurs
 Route::get('/user-levels', [UserLevelController::class, 'index'])->name('user_levels.index');
