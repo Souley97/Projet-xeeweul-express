@@ -75,7 +75,7 @@ class QuestionController extends Controller
         return redirect()->route('questions.index')->with('success', 'Question créée avec succès.');
     }
 
-    public function show($slug)
+    public function detais($slug)
     {
         // Charger la question depuis la base de données en fonction de l'ID
         $question = Question::findOrFail($slug);

@@ -19,6 +19,7 @@
                         <th class="py-2 px-4">Abonnement</th>
                         <th class="py-2 px-4">Prix</th>
                         <th class="py-2 px-4">Actions</th>
+                        <th class="py-2 px-4">Status</th>
                     </tr>
                 </thead>
                 <tbody class="pr-12">
@@ -50,48 +51,49 @@
                                     </button>
                                 </form>
 
-                                <form action="{{ route('subscribe', $plan) }}" method="post">
-                                    @csrf
-                                    <button type="submit">S'abonner</button>
-                                </form>
-                                <div class="left-56    ">
-                                    @if ($plan->is_active)
-                                        <form action="{{ route('subscription-plans.deactivate', $plan->id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
 
-
-
-                                            <button type="submit"><label
-                                                    class="relative inline-flex items-center cursor-pointer">
-                                                    <input type="checkbox" checked value=""
-                                                        class="sr-only peer">
-                                                    <div class="  left-0  "></div>
-                                                    <div
-                                                        class="w-11 h-6 text-white bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
-                                                        <div class="-px-2 mr-4    left-0 start-1">1</div>
-                                                    </div>
-                                                </label></button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('subscription-plans.activate', $plan->id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-
-
-                                            <button type="submit"><label
-                                                    class="relative inline-flex items-center cursor-pointer">
-                                                    <input type="checkbox" value="" class="sr-only peer">
-
-                                                    <div
-                                                        class="w-11 h-6 text-red-500 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
-                                                        <div class="-px-2 bold ml-4  z-40  left-0 start-1">0</div>
-                                                    </div>
-                                                </label></button>
-                                        </form>
-                                    @endif
                                 </div>
                             </td>
+                            <td class="py-2 px-4"> <form action="{{ route('subscribe', $plan) }}" method="post">
+                                @csrf
+                                {{-- <button type="submit">S'abonner</button> --}}
+                            </form>
+                            <div class="left-56    ">
+                                @if ($plan->is_active)
+                                    <form action="{{ route('subscription-plans.deactivate', $plan->id) }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+
+
+
+                                        <button type="submit"><label
+                                                class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" checked value=""
+                                                    class="sr-only peer">
+                                                <div class="  left-0  "></div>
+                                                <div
+                                                    class="w-11 h-6 text-white bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                                    <div class="-px-2 mr-4    left-0 start-1">1</div>
+                                                </div>
+                                            </label></button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('subscription-plans.activate', $plan->id) }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+
+
+                                        <button type="submit"><label
+                                                class="relative inline-flex items-center cursor-pointer">
+                                                <input type="checkbox" value="" class="sr-only peer">
+
+                                                <div
+                                                    class="w-11 h-6 text-red-500 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                                    <div class="-px-2 bold ml-4  z-40  left-0 start-1">0</div>
+                                                </div>
+                                            </label></button>
+                                    </form>
+                                @endif</td>
                         </tr>
                     @endforeach
                 </tbody>

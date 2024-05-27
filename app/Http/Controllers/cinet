@@ -1,0 +1,58 @@
+public function fetchTransactions()
+    {
+        // Créer une instance de Client Goutte
+        $client = new Client();
+
+        // Définir l'URL de la page des transactions
+        $url = 'https://app-new.cinetpay.com/transactions/payments';
+
+        // Requête GET à l'URL des transactions
+        $crawler = $client->request('GET', $url);
+
+        // Tableau pour stocker les informations sur les transactions
+        $transactions = [];
+
+        // Extraire les informations sur les transactions à partir du HTML
+        $crawler->filter('.table tbody tr')->each(function ($node) use (&$transactions) {
+            $transaction = [];
+
+            $node->filter('td')->each(function ($td, $index) use (&$transaction) {
+                // Ajouter les données de chaque colonne à l'objet transaction
+                if ($index === 0) {
+                    $transaction['Date_Creation'] = $td->text();
+                } elseif ($index === 1) {
+                    $transaction['Date_Paiement'] = $td->text();
+                } elseif ($index === 2) {
+                    $transaction['Business'] = $td->text();
+                } elseif ($index === 3) {
+                    $transaction['Business_ID'] = $td->text();
+                } elseif ($index === 4) {
+                    $transaction['Opérateur'] = $td->text();
+                } elseif ($index === 5) {
+                    $transaction['ID_Transaction'] = $td->text();
+                } elseif ($index === 6) {
+                    $transaction['ID_Opérateur'] = $td->text();
+                } elseif ($index === 7) {
+                    $transaction['Téléphone'] = $td->text();
+                } elseif ($index === 8) {
+                    $transaction['Montant_payé'] = $td->text();
+                } elseif ($index === 9) {
+                    $transaction['Devise'] = $td->text();
+                } elseif ($index === 10) {
+                    $transaction['Sync'] = $td->text();
+                } elseif ($index === 11) {
+                    $transaction['Statut'] = $td->text();
+                } elseif ($index === 12) {
+                    $transaction['Commentaire'] = $td->text();
+                }
+            });
+
+            // Ajouter la transaction au tableau des transactions
+            $transactions[] = $transaction;
+        });
+
+        // Stocker les données des transactions dans un fichier JSON
+        Storage::put('transactions.json', json_encode($transactions, JSON_PRETTY_PRINT));
+        dd($transactions);
+        return response()->json(['status' => 'success', 'message' => 'Transactions fetched and stored successfully']);
+    }

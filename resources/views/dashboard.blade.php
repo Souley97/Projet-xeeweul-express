@@ -3,7 +3,7 @@
    @if( Auth::user()->is_admin==1)
 
 
-   <div class="new-users">
+   {{-- <div class="new-users">
     <h2>Mes Parraines</h2>
     <div class="user-list">
         @foreach ($users as $user)
@@ -22,11 +22,11 @@
 
 
 
-        {{-- <form action="{{ route('referral.generate') }}" method="post">
+    <form action="{{ route('referral.generate') }}" method="post">
         <button wire:click="generateReferralCode">Générer un nouveau code</button>
-        </form> --}}
+        </form>
     </div>
-</div>
+</div> --}}
 
 
 {{-- @include('admin.surveys.list') --}}
@@ -40,7 +40,7 @@
                 <th class="text-left">Nom</th>
                 <th class="text-left">Adresse e-mail</th>
                 <th class="text-left">Telephone</th>
-                <th class="text-left">Comptes</th>
+                {{-- <th class="text-left">Comptes</th> --}}
                 <th class="text-left">Actions</th>
             </tr>
         </thead>
@@ -51,7 +51,7 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->phone }}</td>
-                    <td>{{ $user->payment }}</td>
+                    {{-- <td>{{ $user->payment }}</td> --}}
                     <td>
                         <a href="{{ route('users.show', $user->id) }}" class="text-blue-500 mr-2">Voir</a>
                         <a href="{{ route('users.edit', $user->id) }}" class="text-green-500 mr-2">Éditer</a>

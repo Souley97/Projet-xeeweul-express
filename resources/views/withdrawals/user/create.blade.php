@@ -3,7 +3,7 @@
 
     <h1>Créer une nouvelle demande de retrait</h1>
 
-    <form class="min-w-full  flex border p-6 space-y-4rounded-lg" method="POST" action="{{ route('withdrawals.store') }}">
+    <form class="   flex border p-6 space-y-4rounded-lg" method="POST" action="{{ route('withdrawals.store') }}">
         @csrf <!-- Pour des raisons de sécurité, utilisez la directive @csrf pour générer le jeton CSRF -->
 
         {{-- <div  ">

@@ -10,10 +10,13 @@
             <span class="block sm:inline">{{ $errors->first() }}</span>
         </div>
     @endif
-      
+
         <form id="upload-form" action="{{ route('videos.store') }}" method="post" enctype="multipart/form-data" class="max-w-lg mx-auto">
             @csrf
+{{-- Cross-site request forgery
+    falsification de demande intersite
 
+ --}}
             <div class="mb-4">
                 <label for="titre" class="block text-sm font-medium text-gray-700">Titre :</label>
                 <input type="text" name="titre" id="titre" class="mt-1 p-2 w-full border rounded-md" required>
@@ -39,9 +42,9 @@
                 <input type="number" name="duree_minutes" id="duree_minutes" class="mt-1 p-2 w-full border rounded-md">
             </div>
 
-          
 
-       
+
+
 
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
                 Ajouter la vidéo
@@ -56,10 +59,10 @@
             </div>
             <div id="loading-seconds" class="text-white text-2xl ml-2"></div>
         </div>
-        
-    
+
+
     </div>
-   
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var uploadForm = document.getElementById('upload-form');
@@ -121,6 +124,6 @@
     .hidden {
         display: none;
     }</style>
-   
+
 
 </x-app-layout>

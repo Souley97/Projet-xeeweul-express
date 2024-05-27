@@ -66,6 +66,17 @@
                             </span>
                             <div class="text-menu">Quiz</div>
                         </a>
+                        <a href="{{ route('cinetpay')}}"
+                        class="{{ request()->is('subscription*') ? 'active' : '' }}">
+                        <span class="">
+                            <i class="fa-solid fa-people-group"></i> </span>
+                        <div class="text-menu">cinetpay</div>
+                    </a> <a href="{{ route('subscription-plans.index')}}"
+                    class="{{ request()->is('subscription*') ? 'active' : '' }}">
+                    <span class="">
+                        <i class="fa-solid fa-people-group"></i> </span>
+                    <div class="text-menu">Abonnement</div>
+                </a>
                         @can('manage-users', Auth::user()->is_admin)
                             <a href="{{ Route('users.index') }}" class="{{ request()->is('users*') ? 'active' : '' }}">
                                 <span class="">
@@ -99,12 +110,17 @@
                                     <i class="fa-solid fa-people-group"></i> </span>
                                 <div class="text-menu">Parraeinage</div>
                             </a>
-                            <a href="{{ route('subscription-plans.index')}}"
+                            <a href="{{ route('cinetpay')}}"
                                 class="{{ request()->is('subscription*') ? 'active' : '' }}">
                                 <span class="">
                                     <i class="fa-solid fa-people-group"></i> </span>
-                                <div class="text-menu">Abonnement</div>
-                            </a>
+                                <div class="text-menu">cinetpay</div>
+                            </a> <a href="{{ route('subscription-plans.index')}}"
+                            class="{{ request()->is('subscription*') ? 'active' : '' }}">
+                            <span class="">
+                                <i class="fa-solid fa-people-group"></i> </span>
+                            <div class="text-menu">Abonnement</div>
+                        </a>
                             <a href="{{ route('videos.index') }}" class="{{ request()->is('videos*') ? 'active' : '' }}">
                                 <span class="">
                                     <i class="fa-brands fa-youtube"></i> </span>

@@ -1,5 +1,5 @@
 <x-app-layout>
-    
+
     <div class="container bi-sign-turn-left-fill end mx-auto p-6">
         <div class="flex items-center justify-between mb-4">
 
@@ -27,23 +27,23 @@
                         <td class="px-4 py-2">{{ $withdrawal->created_at }}</td>
                         @if ($withdrawal->status=='Validée')
                          <td class="px-4 py-2 bg-lime-200 ">{{ $withdrawal->updated_at }}</td>
-                    
-                            
+
+
                          @elseif ($withdrawal->status=='Rejetée')
-                            
-                   
-                            
-                       
-                       
-                        
+
+
+
+
+
+
                          <td class="px-4 py-3 bg-red-400 text-blue-50">Rejetee de Traitement</td>
-     
+
                          @else
                          <td class="px-4 py-3 bg-red-100"> En cours de Traitement</td>
 
-                             
-                       
-                            
+
+
+
                         @endif
                         <td class="px-4 py-2">{{ $withdrawal->status }}</td>
                     </tr>

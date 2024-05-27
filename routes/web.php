@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnnoceController;
+use App\Http\Controllers\CinetPayController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SubscriptionPlanController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,20 @@ use App\Http\Controllers\VideoController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
+Route::get('/cinetpay', [CinetPayController::class, 'index'])->name('cinetpay');
+Route::get('/transactions', [CinetPayController::class, 'getTransactions']);
+// Route::post('/notify-url', [CinetPayController::class, 'notify_url'])->name('notify_url');
+
+Route::post('/cinetpay', [CinetPayController::class, 'Payment'])->name('cinetpay.payment');
+Route::match(['get', 'post'], '/notify_url', [CinetPayController::class, 'notify_url'])->name('notify_url');
+Route::match(['get', 'post'], '/return_url', [CinetPayController::class, 'return_url'])->name('return_url');
+
+Route::get('/fetch', [CinetPayController::class, 'fetchTransactions'])->name('fetchTransactions');
+Route::get('/fetchA', [CinetPayController::class, 'fetchTransactionA'])->name('fetchTransactions');
+
 
 Route::get('/', function () {
     return view('welcome');
