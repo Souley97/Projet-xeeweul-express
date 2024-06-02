@@ -26,19 +26,6 @@ use App\Http\Controllers\VideoController;
 */
 
 
-
-Route::get('/cinetpay', [CinetPayController::class, 'index'])->name('cinetpay');
-Route::get('/transactions', [CinetPayController::class, 'getTransactions']);
-// Route::post('/notify-url', [CinetPayController::class, 'notify_url'])->name('notify_url');
-
-Route::post('/cinetpay', [CinetPayController::class, 'Payment'])->name('cinetpay.payment');
-Route::match(['get', 'post'], '/notify_url', [CinetPayController::class, 'notify_url'])->name('notify_url');
-Route::match(['get', 'post'], '/return_url', [CinetPayController::class, 'return_url'])->name('return_url');
-
-Route::get('/fetch', [CinetPayController::class, 'fetchTransactions'])->name('fetchTransactions');
-Route::get('/fetchA', [CinetPayController::class, 'fetchTransactionA'])->name('fetchTransactions');
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -195,6 +182,8 @@ Route::put('/subscription-plans/{slug}/activate', [SubscriptionPlanController::c
 Route::put('/subscription-plans/{slug}/deactivate', [SubscriptionPlanController::class, 'deactivate'])->name('subscription-plans.deactivate');
 
 });
+
+
 
 // Route::middleware(['can:manage-users'])->group(function () {
     Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionPlans'])->name('subscription.plans');

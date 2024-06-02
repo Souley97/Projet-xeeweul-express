@@ -1,6 +1,6 @@
 
 
-        <table class="min-w-full">
+    <table class="min-w-full">
             <thead>
                 <tr>
                     <th class="text-left">nom</th>

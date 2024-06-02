@@ -129,9 +129,7 @@ class CinetPayController extends Controller
                 // La transaction a échoué
                 echo 'Échec, code:' . $response_body['code'] . ' Description: ' . $response_body['description'] . ' Message: ' . $response_body['message'];
             }
-        } else {
-            echo "cpm_trans_id non fourni";
-        }
+        
     }
 
     $payment = new Payment([
