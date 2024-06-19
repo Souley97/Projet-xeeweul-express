@@ -25,6 +25,7 @@ use App\Http\Controllers\VideoController;
 |
 */
 
+use App\Http\Controllers\PaytechController;
 
 Route::get('/', function () {
     return view('welcome');

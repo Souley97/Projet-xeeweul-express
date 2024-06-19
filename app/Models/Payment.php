@@ -14,19 +14,24 @@ class Payment extends Model
      *
      * @var array
      */
+    // protected $fillable = [
+    //     'transaction_id',
+    //     'amount',
+    //     'currency',
+    //     'status',
+    //     'customer_email',
+    //     'operator_id',
+    //     'operator',
+    //     'paid_amount',
+    //     'paid_currency',
+    //     'payment_date',
+    //     // Ajoutez d'autres colonnes si nécessaire
+    // ];
+
     protected $fillable = [
-        'transaction_id',
-        'amount',
-        'currency',
-        'status',
-        'customer_email',
-        'operator_id',
-        'operator',
-        'paid_amount',
-        'paid_currency',
-        'payment_date',
-        // Ajoutez d'autres colonnes si nécessaire
+      'item_name','item_price','currency','status','ref_command',  'user_ip','user_lang','payment_id'
     ];
+    
 
     /**
      * The attributes that should be mutated to dates.
