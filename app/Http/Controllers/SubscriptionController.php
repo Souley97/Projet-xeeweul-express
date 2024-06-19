@@ -19,53 +19,14 @@ class SubscriptionController extends Controller
 {
     public function showSubscriptionPlans()
     {
+        $subscriptionPlans = SubscriptionPlan::where('is_active', true)->get();
+
         $plans = SubscriptionPlan::all();
-        return view('subscription.index', compact('plans'));
+        return view('subscription.index', compact('plans', 'subscriptionPlans'));
     }
 
 
-    // public function subscribe(Request $request , SubscriptionPlan $plan)
-    // {
-    //     // Valider la requête
-    //     $request->validate([
-    //         'subscription_plan_id' => 'required|exists:subscription_plans,id',
-    //         // Ajoutez d'autres règles de validation au besoin
-    //     ]);
 
-    //     // Récupérer l'utilisateur connecté
-    //     $user = Auth::user();
-
-    //     // Récupérer le plan d'abonnement sélectionné
-    //     $plan = SubscriptionPlan::findOrFail($request->subscription_plan_id);
-
-    //     // Début de la transaction
-    //     DB::beginTransaction();
-
-    //     try {
-    //         // Créer l'abonnement
-    //         $subscription = new Subscriptions([
-    //             'user_id' => $user->id,
-    //             'subscription_plan_id' => $plan->id,
-    //             'start_date' => now(),
-    //             'end_date' => now()->addDays($plan->trial_period_days ?? 0),
-    //             'status' => 'active', // Vous pouvez modifier le statut selon votre logique
-    //             // Ajoutez d'autres attributs au besoin
-    //         ]);
-    //         $subscription->save();
-
-    //         // Engagez-vous dans la transaction
-    //         DB::commit();
-
-    //         // Rediriger l'utilisateur vers une vue de confirmation ou une autre action
-    //         return redirect()->route('dashboard')->with('success', 'Abonnement souscrit avec succès !');
-    //     } catch (\Exception $e) {
-    //         // En cas d'erreur, annulez la transaction
-    //         DB::rollback();
-
-    //         // Rediriger l'utilisateur vers une vue d'erreur ou une autre action
-    //         return redirect()->route('dashboard')->with('success', 'Abonnement souscrit avec succès !');
-    //     }
-    // }
     public function subscribe(Request $request, SubscriptionPlan $plan)
     {
         // Vérifier si l'utilisateur est déjà abonné au plan
@@ -96,76 +57,7 @@ class SubscriptionController extends Controller
         // Rediriger l'utilisateur vers une page de confirmation ou de gestion de l'abonnement
         return redirect()->route('subscription.confirmation')->with('success', 'Abonnement souscrit avec succès.');
     }
-    // public function handlePaymentNotification(Request $request)
-    // {
-    //     if (!$request->has('transaction_id')) {
-    //         return response()->json(['status' => 'error', 'message' => 'Transaction ID missing'], 400);
-    //     }
 
-    //     $transaction_id = $request->input('transaction_id');
-    //     $apiUrl = 'https://api-checkout.cinetpay.com/v2/payment/check';
-    //         // $apiUrl = 'https://app-new.cinetpay.com/transactions/payments/';
-
-
-    //     $response = Http::withHeaders([
-    //         'Content-Type' => 'application/json',
-    //         'apikey' => env("APIKEY"), // Assurez-vous que cette ligne fonctionne
-    //     ])->post($apiUrl, [
-    //         'site_id' => env("SITE_ID"),
-    //         'transaction_id' => $transaction_id,
-    //     ]);
-
-    //     if (!$response->successful()) {
-    //         $errorBody = $response->body();
-    //         Log::error('Failed to fetch transaction from CinetPay API.', ['response' => $errorBody]);
-    //         return response()->json(['status' => 'error', 'message' => 'Failed to fetch transaction', 'error' => $errorBody], 500);
-    //     }
-
-    //     $response_body = $response->json();
-
-    //     if ($response_body['code'] !== '00') {
-    //         return response()->json(['status' => 'error', 'message' => 'Transaction not accepted'], 400);
-    //     }
-
-    //     $transaction = $response_body['data'];
-    //     $user = User::where('email', $transaction['customer_email'])->first();
-
-    //     if (!$user) {
-    //         return response()->json(['status' => 'error', 'message' => 'User not found'], 404);
-    //     }
-
-    //     $subscription = Subscriptions::firstOrNew([
-    //         'user_id' => $user->id,
-    //         'subscription_plan_id' => $transaction['plan_id'],
-    //     ]);
-
-    //     $subscription->start_date = now();
-    //     $subscription->end_date = now()->addDays($transaction['plan_duration']);
-    //     $subscription->status = 'active';
-    //     $subscription->payment_method_id = $transaction['payment_method_id'] ?? null;
-    //     $subscription->save();
-    //     $data = $request->all();
-
-    //         $transaction_data = [
-    //             'Date_Creation' => $data['cpm_trans_date'],
-    //             'Date_Paiement' => now(), // Vous pouvez également utiliser $data['cpm_trans_date']
-    //             'Business' => 'xeeweul-express',
-    //             'Business_ID' => $data['cpm_site_id'],
-    //             'Operateur' => $data['payment_method'] ?? 'N/A',
-    //             'ID_Transaction' => $data['cpm_trans_id'],
-    //             'ID_Operateur' => $data['operator_id'] ?? 'N/A',
-    //             'Telephone' => $data['cel_phone_num'] ?? 'N/A',
-    //             'Montant_paye' => $data['cpm_amount'],
-    //             'Devise' => $data['cpm_currency'],
-    //             'Sync' => 'Y',
-    //             'Statut' => $data['cpm_error_message'] === '00' ? 'ACCEPTED' : 'REFUSED', // Vous devez définir la logique de statut appropriée ici
-    //             'Commentaire' => $data['cpm_error_message'] ?? 'N/A',
-    //         ];
-
-    //     Storage::put("transactions/{$transaction_id}.json", json_encode($transaction_data, JSON_PRETTY_PRINT));
-
-    //     return redirect()->route('subscription.confirmation')->with('success', 'Transaction processed successfully');
-    // }
     public function showAcceptedTransactions()
     {
         $payments = Payment::where('status', 'ACCEPTED')->get();

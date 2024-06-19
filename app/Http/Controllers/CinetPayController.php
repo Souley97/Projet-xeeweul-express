@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\SubscriptionPlan;
+use App\Models\Subscriptions;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -73,17 +75,27 @@ class CinetPayController extends Controller
             ]));
             $payment = new Payment([
                 "transaction_id" => "xeeweule-" . $transaction_id,
-                'amount' => $request['cpm_amount'],
-                'currency' => $request['cpm_currency'],
+                'amount' => $request['amount'],
+                'currency' => $request['currency'],
                 'status' => 'pending',
                 'customer_email' => Auth::user()->email, // Récupérer l'email de l'utilisateur connecté
                 'operator_id' => $response_body['data']['operator_id'] ?? null,
                 'operator' => $response_body['data']['operator'] ?? null,
                 'paid_amount' => $response_body['data']['payment_method'] ?? null,
-                'paid_currency' => $response_body['data']['cpm_currency'] ?? null,
+                'paid_currency' => $response_body['data']['currency'] ?? null,
                 'payment_date' => $response_body['data']['payment_date'] ?? null,
             ]);
             $payment->save();
+            $subscriptionPlan = SubscriptionPlan::find($request['subscription_plan_id']);
+            $subscription = Subscriptions::create([
+                'user_id' => Auth::id(),
+                'subscription_plan_id' => $subscriptionPlan->id,
+                'start_date' => now(),
+                'end_date' => now()->addDays($subscriptionPlan->trial_period_days),
+                'status' => 'active',
+            ]);
+            $subscription->save();
+
 
 
             return redirect($payment_link);

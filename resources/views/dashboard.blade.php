@@ -47,15 +47,15 @@
         <tbody>
             @foreach ($users as $user)
                 <tr>
-                    <td>{{ $user->id }}</td>
+                    {{-- <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->phone }}</td>
+                    <td>{{ $user->phone }}</td> --}}
                     {{-- <td>{{ $user->payment }}</td> --}}
                     <td>
-                        <a href="{{ route('users.show', $user->id) }}" class="text-blue-500 mr-2">Voir</a>
+                        {{-- <a href="{{ route('users.show', $user->id) }}" class="text-blue-500 mr-2">Voir</a>
                         <a href="{{ route('users.edit', $user->id) }}" class="text-green-500 mr-2">Éditer</a>
-                        <button class="text-red-500 delete-user" data-id="{{ $user->id }}">Supprimer</button>
+                        <button class="text-red-500 delete-user" data-id="{{ $user->id }}">Supprimer</button> --}}
                     </td>
                 </tr>
             @endforeach

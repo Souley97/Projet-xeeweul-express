@@ -129,7 +129,7 @@ class CinetPayController extends Controller
                 // La transaction a échoué
                 echo 'Échec, code:' . $response_body['code'] . ' Description: ' . $response_body['description'] . ' Message: ' . $response_body['message'];
             }
-        
+
     }
 
     $payment = new Payment([
@@ -145,6 +145,7 @@ class CinetPayController extends Controller
         'payment_date' => $response_body['data']['payment_date'] ?? null,
     ]);
     $payment->save();
+}
 
 
     // //configuration de l'api la notification
@@ -286,3 +287,4 @@ class CinetPayController extends Controller
     //     return ($response);
     // }
 }
+
