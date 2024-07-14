@@ -18,33 +18,27 @@
                     <h2 id="pricing"
                         class="box-border m-0 text-3xl font-semibold leading-tight tracking-tight text-black border-solid sm:text-4xl md:text-5xl">
                         ÉTAPE 1 SUR 3
-                        Choisissez le forfait qui vous convient </h2>
-                    <p class="box-border mt-2 text-xl text-gray-900 border-solid sm:text-2xl">
-                    </p>
+                        Choisissez le forfait qui vous convient
+                    </h2>
                 </div>
-
 
                 <div id="pricing"
                     class="grid grid-cols-1 gap-4 mt-4 leading-7 text-gray-900 border-0 border-gray-200 sm:mt-6 sm:gap-6 md:mt-8 md:gap-0 lg:grid-cols-3">
-                    <!-- Price 1 -->
                     @foreach ($plans as $plan)
-                        <div
-                            class="relative border-4 border-blue-600 border-solid rounded-lg  z-10 flex flex-col items-center max-w-md p-4 mx-auto my-0 lg:-mr-3 sm:my-0 sm:p-6 md:my-8 md:p-8">
-                            <h3
-                                class="m-0 text-2xl font-semibold leading-tight tracking-tight text-black border-0 border-gray-200 sm:text-3xl md:text-4xl">
+                        <div class="relative border-1 border-blue-600 border-solid rounded-lg z-10 flex flex-col items-center max-w-md p-4 mx-auto my-0 lg:-mr-3 sm:my-0 sm:p-6 md:my-8 md:p-8">
+                            <h3 class="m-0 text-2xl font-semibold leading-tight tracking-tight text-black border-0 border-gray-200 sm:text-3xl md:text-4xl">
                                 {{ $plan->name }}
                             </h3>
                             <div class="flex items-end mt-6 leading-7 text-gray-900 border-0 border-gray-200">
                                 <p class="box-border m-0 text-6xl font-semibold leading-none border-solid">
                                     {{ $plan->price }} f
                                 </p>
-                                <p class="box-border m-0 border-solid" style="border-image: initial;">
+                                <p class="box-border m-0 border-solid">
                                     /{{ $plan->interval }}
                                 </p>
                             </div>
                             <ul class="flex-1 p-0 mt-4 ml-5 leading-7 text-gray-900 border-0 border-gray-200">
-                                <li
-                                    class="inline-flex items-center  w-full mb-2 ml-5 font-semibold text-left border-solid">
+                                <li class="inline-flex items-center w-full mb-2 ml-5 font-semibold text-left border-solid">
                                     <svg class="w-5 h-5 mr-2 font-semibold leading-7 text-blue-600 sm:h-5 sm:w-5 md:h-6 md:w-6"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -54,8 +48,7 @@
                                     </svg>
                                 </li>
 
-                                <li
-                                    class="inline-flex items-center  w-full mb-2 ml-5 font-semibold text-left border-solid">
+                                <li class="inline-flex items-center w-full mb-2 ml-5 font-semibold text-left border-solid">
                                     <svg class="w-5 h-5 mr-2 font-semibold leading-7 text-blue-600 sm:h-5 sm:w-5 md:h-6 md:w-6"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -66,8 +59,7 @@
                                     Qualité vidéo et sonore
                                 </li>
 
-                                <li
-                                    class="inline-flex items-center block w-full mb-2 ml-5 font-semibold text-left border-solid">
+                                <li class="inline-flex items-center block w-full mb-2 ml-5 font-semibold text-left border-solid">
                                     <svg class="w-5 h-5 mr-2 font-semibold leading-7 text-blue-600 sm:h-5 sm:w-5 md:h-6 md:w-6"
                                         fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -79,36 +71,24 @@
                                 </li>
 
                             </ul>
-                            <form method="POST" action="{{ route('cinetpay.payment') }}">
+
+
+                            <form method="POST" action="{{ route('paytech.payment') }}">
                                 @csrf
-                                <div class="col-md-12">
-                                    <input type="hidden" name="subscription_plan_id" value="{{ $plan->id }}">
-                                    <div class="mt-3">
-                                        <input type="hidden" class="form-control" id="exampleInputMontant"
-                                            name="amount" value="{{ $plan->price }}" aria-describedby="emailHelp">
-                                    </div>
-                                    <div class="mt-3">
-                                        <label for="exampleInputDevise" class="form-label">Devise:</label>
-                                        <select class="form-select" name="currency" aria-label="Default select example">
-                                            <option selected value="XOF">XOF</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group mt-3">
-                                    <button
-                                        class="inline-flex justify-center w-full px-4 py-3 mt-8 font-sans text-sm leading-none text-center text-blue-600 no-underline bg-transparent border border-blue-600 rounded-md cursor-pointer hover:bg-blue-700 hover:border-blue-700 hover:text-white focus-within:bg-blue-700 focus-within:border-blue-700 focus-within:text-white sm:text-base md:text-lg"
-                                        type="submit">S'abonner</button>
-                                </div>
+                                <input type="hidden" name="item_name" value="{{ Auth::user()->email }}">
+                                <input type="hidden" name="item_price" value="{{ $plan->price }}">
+                                <input type="hidden" name="currency" value="XOF">
+                                <input type="hidden" name="subscription_plan_id" value="{{ $plan->id }}">
+                                <button
+                                    class="inline-flex justify-center w-full px-4 py-3 mt-8 font-sans text-sm leading-none text-center text-blue-600 no-underline bg-transparent border border-blue-600 rounded-md cursor-pointer hover:bg-blue-700 hover:border-blue-700 hover:text-white focus-within:bg-blue-700 focus-within:border-blue-700 focus-within:text-white sm:text-base md:text-lg"
+                                    type="submit">S'abonner</button>
                             </form>
-
-
                         </div>
                     @endforeach
-
-
                 </div>
             </div>
         </section>
+
     </div>
 
 </x-app-layout>

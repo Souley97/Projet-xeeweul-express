@@ -30,7 +30,7 @@ class SubscriptionController extends Controller
     public function subscribe(Request $request, SubscriptionPlan $plan)
     {
         // Vérifier si l'utilisateur est déjà abonné au plan
-        if ($request->user()->subscribedToPlan($plan->id)) {
+        if ($request->user()->subscribedToPlan($plan->id)  and $endDate <= now()) {
             return redirect()->back()->with('error', 'Vous êtes déjà abonné à ce plan.');
         }
 

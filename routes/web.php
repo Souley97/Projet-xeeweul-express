@@ -227,12 +227,16 @@ Route::put('/admin/users/{userId}/update-role', [UserController::class, 'updateR
 Route::get('/admin/users/{userId}/edit-role', [UserController::class, 'editRole'])->name('admin.editRole');
 
 // });
+// Route::middleware(['auth', 'check.subscription'])->group(function () {
 
 Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
 Route::get('/videos/list', [VideoController::class, 'list'])->name('videos.liste');
+Route::get('/videos/{id}', [VideoController::class, 'show'])->name('videos.show');
+
+//  });
+
 Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create');
 Route::post('/videos', [VideoController::class, 'store'])->name('videos.store');
-Route::get('/videos/{id}', [VideoController::class, 'show'])->name('videos.show');
 // livk
 Route::post('/videos/{video}/like', [VideoController::class, 'like'])->name('videos.like');
 

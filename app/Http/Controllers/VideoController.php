@@ -87,6 +87,7 @@ foreach ($videos as $video) {
 
     public function show($slug , Request $request)
 {
+    
     $querye = $request->input('search');
     $videoShearch = Video::when($querye, function ($query) use ($querye) {
         $query->where('titre', 'like', '%' . $querye . '%');
@@ -135,6 +136,7 @@ public function like(Video $video)
 
 public function showAllData()
 {
+
     $users = User::all();
     $videos = Video::with('likes')->get(); // Assurez-vous que votre modèle Video a une relation avec les likes
 

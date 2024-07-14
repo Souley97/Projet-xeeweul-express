@@ -33,7 +33,7 @@
                 </div>
 
                 {{-- annoces --}}
-                @include('videos.lecture.annoce')
+                {{-- @include('videos.lecture.annoce') --}}
                 {{-- fin annoces --}}
 
             </div>

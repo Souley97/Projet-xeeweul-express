@@ -8,50 +8,42 @@
         <div class="  post-grid post-grid-light post-grid-grid post-grid-avatar post-grid-avatar-size-md" >
             <div class=" row  row-cols-sm-3 row-cols-md-3 row-cols-xl-3">
                 @foreach ($videoShearch as $videoList)
-                    <div class="post-item  mb-4n">
-                        <article
-                            class="post-134 video type-video status-publish has-post-thumbnail hentry categories-gaming video_tag-featured video_tag-game video_tag-ghost video_tag-tsushima pmpro-has-access">
-                            <div class="post-body position-relative">
-
-
-                                <div class="post-main position-relative rounded overflow-hidden">
-                                    <a class="post-permalink" title="Ghost of Tsushima"
-                                        href="{{ route('videos.show', $videoList->slug) }}">
-                                        <div class="post-thumbnail ratio ratio-16x9 rounded overflow-hidden bg-dark">
-                                            <video width="560" height="287"
-                                                src="{{ asset('storage/videos/' . $videoList->chemin_vers_video) }}"
-                                                class="img-fluid wp-post-image" alt="">
-                                                < <div class="video-hover">
-
-                                                    <span
-                                                        class="icon-play top-50 start-50 translate-middle position-absolute"></span>
-                                        </div>
+                <div class="post-item mb-4">
+                    <article class="post-134 video type-video status-publish has-post-thumbnail hentry categories-gaming video_tag-featured video_tag-game video_tag-ghost video_tag-tsushima pmpro-has-access">
+                        <div class="post-body position-relative">
+                            <div class="post-main position-relative rounded overflow-hidden">
+                                <a class="post-permalink" title="{{ $videoList->titre }}" href="{{ route('videos.show', $videoList->slug) }}">
+                                    <div class="post-thumbnail ratio ratio-16x9 rounded overflow-hidden bg-dark">
+                                        <video width="560" height="287" src="{{ asset('storage/videos/' . $videoList->chemin_vers_video) }}" class="img-fluid wp-post-image" alt="">
+                                            <div class="video-hover">
+                                                <span class="icon-play top-50 start-50 translate-middle position-absolute"></span>
+                                            </div>
+                                        </video>
                                         <div class="video-length badge">
-                                            {{ $videoList->duree_minutes }}</div>
-                                </div>
+                                            {{ $videoList->duree_minutes }}
+                                        </div>
+                                    </div>
                                 </a>
-
                             </div>
                             <div class="post-bottom mt-3 d-flex align-items-start">
                                 <div class="me-2">
-                                    <div class="post-avatar ">
-                                        <div class="user-avatar is-off user-avatar-md"><a data-bs-toggle="tooltip"
-                                                data-bs-placement="right"
-                                                class="d-flex align-items-center fw-bold text-decoration-none"
-                                                title="Celina" href="#"><img alt="Khadime lo rafahi"
-                                                    src="/images/bg/xe/khadime.jpeg" srcset="/images/bg/xe/khadime.jpeg"
-                                                    class="avatar avatar-200 photo img-thumbnail" height="200"
-                                                    width="200" loading="lazy" decoding="async" /></a>
+                                    <div class="post-avatar">
+                                        <div class="user-avatar is-off user-avatar-md">
+                                            <a data-bs-toggle="tooltip" data-bs-placement="right" class="d-flex align-items-center fw-bold text-decoration-none" title="{{ $videoList->realisateur }}" href="#">
+                                                <img alt="Avatar de l'utilisateur" src="/images/bg/xe/khadime.jpeg" srcset="/images/bg/xe/khadime.jpeg" class="avatar avatar-200 photo img-thumbnail" height="200" width="200" loading="lazy" decoding="async" />
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="post-meta w-100">
-                                    <h2 class="post-meta__title post-title"><a title="Ghost of Tsushima"
-                                            href="../EKQe1rjaJY/index.html">{{ $videoList->titre }}</a>
+                                    <h2 class="post-meta__title post-title">
+                                        <a title="{{ $videoList->titre }}" href="{{ route('videos.show', $videoList->slug) }}">
+                                            {{ $videoList->titre }}
+                                        </a>
                                     </h2>
                                     <div class="post-meta__items d-flex flex-column">
                                         <div class="post-meta__author">
-                                            <a href="{{ route('videos.show', $videoList->id) }}">
+                                            <a href="{{ route('videos.show', $videoList->slug) }}">
                                                 <span class="post-meta__icon icon-user-o"></span>
                                                 <span class="post-meta__text">{{ $videoList->realisateur }}</span>
                                             </a>
@@ -63,7 +55,7 @@
                                             </div>
                                             <div class="post-meta__date">
                                                 <span class="icon-calendar-empty"></span>
-                                                <a title="Ghost of Tsushima" href="../EKQe1rjaJY/index.html">
+                                                <a title="{{ $videoList->titre }}" href="{{ route('videos.show', $videoList->slug) }}">
                                                     <time datetime="{{ $videoList->created_at }}" class="date">
                                                         {{ $videoList->created_at->diffForHumans() }}
                                                     </time>
@@ -73,79 +65,17 @@
                                     </div>
                                 </div>
                             </div>
-                    </div>
-                    </article>
-            </div>
-            @endforeach
 
+                                <!-- L'utilisateur n'est pas abonné, affichez un bouton pour s'abonner -->
 
-            <div class="post-item  mb-4">
-                <article
-                    class="post-55 video type-video status-publish has-post-thumbnail hentry categories-gaming video_tag-arkham video_tag-batman video_tag-game video_tag-knight video_tag-trailer pmpro-level-required pmpro-level-4 pmpro-no-access"
-                   >
-                    <div class="post-body position-relative">
-                        <div class="post-main position-relative rounded overflow-hidden">
-                            <div class="post-permalink" title="Batman: Arkham Knight &#8211; Meeting The Arkham Knight">
-                                <div class="post-thumbnail ratio ratio-16x9 rounded overflow-hidden bg-dark">
-                                    <iframe width="560" height="315"
-                                        src="https://www.youtube.com/embed/QtToOtjWSbQ?si=fwkIYSZwO-k9NuLa"
-                                        title="YouTube video player" frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        allowfullscreen></iframe>
-                                    <div class="video-paid badge">
-                                        <span class="icon icon-lock"></span>
-                                    </div>
-                                    {{-- <div class="video-hover">
-                                        <span
-                                            class="icon-play top-50 start-50 translate-middle position-absolute"></span>
-                                    </div> --}}
-
-                                </div>
-                            </div>
-                            <div class="post-bottom mt-3 d-flex align-items-start">
-                                <div class="me-2">
-                                    <div class="post-avatar ">
-                                        <div class="user-avatar is-off user-avatar-md"><a data-bs-toggle="tooltip"
-                                                data-bs-placement="right"
-                                                class="d-flex align-items-center fw-bold text-decoration-none"
-                                                title="Audrey" href="../../author/audrey/index.html"><img alt
-                                                    src="../../wp-content/uploads/2021/08/avatar-16.jpg"
-                                                    srcset="https://streamtube.marstheme.com/wp-content/uploads/2021/08/avatar-16.jpg 2x"
-                                                    class="avatar avatar-200 photo img-thumbnail" height="200"
-                                                    width="200" loading="lazy" decoding="async" /></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="post-meta w-100">
-                                    <h2 class="post-meta__title post-title"><a
-                                            title="Batman: Arkham Knight &#8211; Meeting The Arkham Knight"
-                                            href="../7LDdwpRe1Y/index.html">Groupe infirmatique VIP</a></h2>
-                                    <div class="post-meta__items d-flex flex-column">
-                                        <div class="post-meta__author">
-                                            <a href="../../author/audrey/index.html">
-                                                <span class="post-meta__icon icon-user-o"></span>
-                                                <span class="post-meta__text">S.Khadim Lo Rafahi</span>
-                                            </a>
-                                        </div>
-                                        <div class="d-flex gap-3">
-                                            <div class="post-meta__views">
-                                                <span class="icon-eye"></span>
-                                                61 views
-                                            </div>
-                                            <div class="post-meta__date">
-                                                <span class="icon-calendar-empty"></span>
-                                                <a title="Batman: Arkham Knight &#8211; Meeting The Arkham Knight"
-                                                    href="../7LDdwpRe1Y/index.html">
-                                                    <time datetime="2021-08-18 14:18:00" class="date">2 years</time>
-                                                    ago </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                </article>
-            </div>
+                    </article>
+                </div>
+                @endforeach
+
+
+
+            
 
 
 
