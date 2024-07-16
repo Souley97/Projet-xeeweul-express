@@ -74,9 +74,9 @@ class PaytechController extends Controller
             ->setCurrency($validatedData['currency'])
             ->setRefCommand($transaction_id_full)
             ->setNotificationUrl([
-                'ipn_url' => 'https://af95-154-125-121-218.ngrok-free.app/paytech/ipn', // URL HTTPS pour les notifications IPN de PayTech
-                'success_url' => 'https://af95-154-125-121-218.ngrok-free.app/paytech/success/' . $validatedData['subscription_plan_id'],
-                'cancel_url' => 'https://af95-154-125-121-218.ngrok-free.app/paytech/cancel', // URL de redirection en cas d'annulation
+                'ipn_url' => 'https://f785-41-214-3-212.ngrok-free.app/paytech/ipn', // URL HTTPS pour les notifications IPN de PayTech
+                'success_url' => 'https://f785-41-214-3-212.ngrok-free.app/paytech/success/' . $validatedData['subscription_plan_id'],
+                'cancel_url' => 'https://f785-41-214-3-212.ngrok-free.app/paytech/cancel', // URL de redirection en cas d'annulation
             ]);
 
             // Envoyer la requête de paiement
@@ -104,7 +104,31 @@ class PaytechController extends Controller
                         'lang' => $request->header('Accept-Language'),
                     ]
                 ]));
+   // Activer l'abonnement pour l'utilisateur
+   $user = $request->user();
+   $subscriptionPlan = SubscriptionPlan::findOrFail($validatedData['subscription_plan_id']);
 
+   $currentSubscription = $user->subscriptions()
+                               ->where('subscription_plan_id', $subscriptionPlan->id)
+                               ->where('end_date', '>=', now())
+                               ->first();
+
+   if ($currentSubscription) {
+       return redirect()->back()->with('error', 'Vous êtes déjà abonné à ce plan.');
+   }
+
+   $startDate = now();
+   $endDate = $startDate->copy()->addDays($subscriptionPlan->duration_days ?? 30);
+
+   $subscription = new Subscriptions([
+       'user_id' => $user->id,
+       'subscription_plan_id' => $subscriptionPlan->id,
+       'start_date' => $startDate,
+       'end_date' => $endDate,
+       'status' => 'active',
+   ]);
+
+   $subscription->save();
                 // Rediriger l'utilisateur vers l'URL de paiement de PayTech
                 return redirect()->away($payment_link);
             } else {

@@ -83,7 +83,7 @@ Route::get('/payment-notification', function () {
     return view('subscription/payments/notification');
 });
 
-Route::get('/accepted-transactions', [SubscriptionController::class, 'showAcceptedTransactions']);
+Route::get('/accepted-transactions', [SubscriptionController::class, 'showAcceptedTransactions'])->name('listed-transactions');
 
 
 Route::post('/payment/notification', [SubscriptionController::class, 'handlePaymentNotification'])->name('payment.notification');

@@ -1,5 +1,12 @@
-@can('manage-users', Auth::user())<x-app-layout>
+@can('manage-users', Auth::user())
+<x-app-layout>
 
+
+    <div class="mt-9">
+        <a href="{{ route('listed-transactions') }}" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">
+            Liste des abonnementes
+        </a>
+    </div>
 
 
         <div class="bg-white mt-9 p-2 shadow-md rounded-lg">
