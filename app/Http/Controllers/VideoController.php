@@ -19,24 +19,24 @@ class VideoController extends Controller
         $videoShearch = Video::when($querye, function ($query) use ($querye) {
             $query->where('titre', 'like', '%' . $querye . '%');
         })
-        ->withCount('likes')
-        ->orderByDesc('likes_count')
-        ->get();
-    //     $videosLikeOrView = Video::withCount(['likes', 'views'])
-    // ->orderByDesc(request('order_by') === 'likes' ? 'likes_count' : 'views_count')->get();
-    // $videosLikeOrView = Video::withCount(['likes_count', 'views_count'])
-    // ->orderByDesc(request('order_by') === 'likes' ? 'likes_count' : 'views_count')->get();
+            ->withCount('likes')
+            ->orderByDesc('likes_count')
+            ->get();
+        //     $videosLikeOrView = Video::withCount(['likes', 'views'])
+        // ->orderByDesc(request('order_by') === 'likes' ? 'likes_count' : 'views_count')->get();
+        // $videosLikeOrView = Video::withCount(['likes_count', 'views_count'])
+        // ->orderByDesc(request('order_by') === 'likes' ? 'likes_count' : 'views_count')->get();
 
 
-// Accéder au nombre de vues de toutes les vidéos
-$videos = Video::all();
-foreach ($videos as $video) {
-    $viewsCount = $video->views_count;
-}
+        // Accéder au nombre de vues de toutes les vidéos
+        $videos = Video::all();
+        foreach ($videos as $video) {
+            $viewsCount = $video->views_count;
+        }
         $users = User::all();
         $videoeLikes = Video::with('likes')->get(); // Assurez-vous que votre modèle Video a une relation avec les likes
         $videos = Video::all()->sortDesc();
-        return view('videos.admin.index', compact('videos','users','videoeLikes', 'querye','videoShearch'));
+        return view('videos.admin.index', compact('videos', 'users', 'videoeLikes', 'querye', 'videoShearch'));
     }
     public function list(Request $request)
     {
@@ -45,11 +45,11 @@ foreach ($videos as $video) {
         $videoShearch = Video::when($querye, function ($query) use ($querye) {
             $query->where('titre', 'like', '%' . $querye . '%');
         })->withCount('likes')
-        ->orderByDesc('likes_count')
-        ->get();
+            ->orderByDesc('likes_count')
+            ->get();
         // $videoShearch = Video::all()->sortDesc();
         $videos = Video::all();
-        return view('videos.list', compact('videos','querye','videoShearch'));
+        return view('videos.list', compact('videos', 'querye', 'videoShearch'));
     }
 
 
@@ -85,70 +85,70 @@ foreach ($videos as $video) {
         return redirect()->route('videos.index')->with('success', 'La vidéo a été ajoutée avec succès.');
     }
 
-    public function show($slug , Request $request)
-{
-    
-    $querye = $request->input('search');
-    $videoShearch = Video::when($querye, function ($query) use ($querye) {
-        $query->where('titre', 'like', '%' . $querye . '%');
-    })->withCount('likes')
-    ->orderByDesc('likes_count')
-    ->get();
+    public function show($slug, Request $request)
+    {
 
-    // Chargez la vidéo avec l'id donné
-    $video = Video::where('slug',$slug)->first();
-    $hashVideo = Video::where('slug',$slug)->first();
+        $querye = $request->input('search');
+        $videoShearch = Video::when($querye, function ($query) use ($querye) {
+            $query->where('titre', 'like', '%' . $querye . '%');
+        })->withCount('likes')
+            ->orderByDesc('likes_count')
+            ->get();
 
-       // Vérifiez si l'utilisateur a déjà vu cette vidéo
-       $userHasViewed = $request->session()->has('viewed_videos.' . $video->id);
+        // Chargez la vidéo avec l'id donné
+        $video = Video::where('slug', $slug)->first();
+        $hashVideo = Video::where('slug', $slug)->first();
 
-       // Si l'utilisateur n'a pas encore vu la vidéo, incrémentez le nombre de vues
-       if (!$userHasViewed) {
-           $video->increment('views_count');
+        // Vérifiez si l'utilisateur a déjà vu cette vidéo
+        $userHasViewed = $request->session()->has('viewed_videos.' . $video->id);
 
-           // Enregistrez dans la session que l'utilisateur a vu cette vidéo
-           $request->session()->put('viewed_videos.' . $video->id, true);
-       }
+        // Si l'utilisateur n'a pas encore vu la vidéo, incrémentez le nombre de vues
+        if (!$userHasViewed) {
+            $video->increment('views_count');
+
+            // Enregistrez dans la session que l'utilisateur a vu cette vidéo
+            $request->session()->put('viewed_videos.' . $video->id, true);
+        }
 
 
-    // Chargez les likes pour cette vidéo
-    $video->load('likes');
+        // Chargez les likes pour cette vidéo
+        $video->load('likes');
 
-    // Chargez toutes les vidéos actives (si vous avez besoin de les afficher dans la vue)
-    $videos = Video::all()->where('is_active', true)->sortDesc();
+        // Chargez toutes les vidéos actives (si vous avez besoin de les afficher dans la vue)
+        $videos = Video::all()->where('is_active', true)->sortDesc();
 
-    // Passez la vidéo et d'autres données à la vue
- return view('videos.index',  compact('videos','video','querye','videoShearch','hashVideo'));
-}
-
-public function like(Video $video)
-{
-    $like = auth()->user()->likes()->where('video_id', $video->id)->first();
-
-    if ($like) {
-        $like->toggleLike();
-    } else {
-        Like::create(['user_id' => auth()->id(), 'video_id' => $video->id, 'active' => true]);
+        // Passez la vidéo et d'autres données à la vue
+        return view('videos.index', compact('videos', 'video', 'querye', 'videoShearch', 'hashVideo'));
     }
 
-    return back();
-}
+    public function like(Video $video)
+    {
+        $like = auth()->user()->likes()->where('video_id', $video->id)->first();
 
-public function showAllData()
-{
+        if ($like) {
+            $like->toggleLike();
+        } else {
+            Like::create(['user_id' => auth()->id(), 'video_id' => $video->id, 'active' => true]);
+        }
 
-    $users = User::all();
-    $videos = Video::with('likes')->get(); // Assurez-vous que votre modèle Video a une relation avec les likes
+        return back();
+    }
 
-    return view('votre_vue', ['users' => $users, 'videos' => $videos]);
-}
+    public function showAllData()
+    {
 
-// public function show($id)
+        $users = User::all();
+        $videos = Video::with('likes')->get(); // Assurez-vous que votre modèle Video a une relation avec les likes
+
+        return view('votre_vue', ['users' => $users, 'videos' => $videos]);
+    }
+
+    // public function show($id)
 // {
 //     $hashVideo = Video::find($id);
 //         // Incrémentez le nombre de vues
 
-//     $view = Video::find($id);
+    //     $view = Video::find($id);
 //     $view->increment('views_count');
 //     $view->load('like');
 //     $videos=Video::all()->where('is_active',True)->sortDesc();
@@ -158,13 +158,13 @@ public function showAllData()
 // {
 //     $like = auth()->user()->likes()->where('video_id', $video->id)->first();
 
-//     if ($like) {
+    //     if ($like) {
 //         $like->toggleLike();
 //     } else {
 //         Like::create(['user_id' => auth()->id(), 'video_id' => $video->id, 'active' => true]);
 //     }
 
-//     return back();
+    //     return back();
 // }
 // public function like(Video $video)
 // {
@@ -173,22 +173,22 @@ public function showAllData()
 // }
 
 
-public function search(Request $request)
-{
-    $query = $request->input('q');
+    public function search(Request $request)
+    {
+        $query = $request->input('q');
 
-    $videos = Video::where('titre', 'like', '%' . $query . '%')->get();
+        $videos = Video::where('titre', 'like', '%' . $query . '%')->get();
 
-    return view('videos/list.search', compact('videos', 'query'));
-}
+        return view('videos/list.search', compact('videos', 'query'));
+    }
 
 
 
-public function edit($slug)
-{
-    $video = Video::where('slug', $slug)->first();
-    return view('videos.admin.update', compact('video'));
-}
+    public function edit($slug)
+    {
+        $video = Video::where('slug', $slug)->first();
+        return view('videos.admin.update', compact('video'));
+    }
 
 
     public function update(Request $request, $id)

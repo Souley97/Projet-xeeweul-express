@@ -6,7 +6,7 @@
             <h2 class="widget-title d-flex align-items-center"> Xam Xam </h2>
         </div>
         <div class="  post-grid post-grid-light post-grid-grid post-grid-avatar post-grid-avatar-size-md" >
-            <div class=" row  row-cols-sm-3 row-cols-md-3 row-cols-xl-3">
+            <div class=" row  row-cols-sm-3 row-cols-md-3 row-cols-xl-4">
                 @foreach ($videoShearch as $videoList)
                 <div class="post-item mb-4">
                     <article class="post-134 video type-video status-publish has-post-thumbnail hentry categories-gaming video_tag-featured video_tag-game video_tag-ghost video_tag-tsushima pmpro-has-access">
@@ -75,7 +75,7 @@
 
 
 
-            
+
 
 
 

@@ -2,7 +2,7 @@
 <!-- resources/views/videos/create.blade.php -->
 
 
-    <div class="container mx-auto p-8">
+    <div class="container mx-auto bg-white rounded-lg p-9  p-8">
         <h2 class="text-2xl font-semibold mb-4">Ajouter une nouvelle vidéo</h2>
         @if ($errors->any())
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">

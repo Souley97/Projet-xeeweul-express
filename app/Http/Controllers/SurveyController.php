@@ -69,8 +69,9 @@ class SurveyController extends Controller
 
         return redirect()->route('surveys.index');
     }
-    public function showSurvey(Survey $survey)
+    public function showSurvey( $id)
     {
+        $survey = Survey::find($id);
         Question::all();
         // Chargez les questions du sondage avec les options de réponse
         $survey->load('questions.options');
@@ -130,8 +131,10 @@ class SurveyController extends Controller
     }
 
 
-    public function showResults(Survey $survey)
+    public function showResults( $id)
     {
+
+        $survey = Survey::find($id);
         // Récupérer toutes les questions du sondage
         $qauestions = $survey->questions;
 
@@ -186,19 +189,11 @@ class SurveyController extends Controller
         return redirect()->route('surveys.index');
     }
 
-    public function destroy(Survey $survey)
+    public function destroy( $id)
     {
+        $survey = Survey::find($id);
         $survey->delete();
         return redirect()->route('surveys.index');
     }
 
-    public function createdBy()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-
-    }
-    public function updatedBy()
-    {
-        return $this->belongsTo(User::class, 'updated_by');
-    }
 }

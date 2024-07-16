@@ -59,11 +59,41 @@ Route::middleware([
 });
 
 
+Route::middleware(['can:all-users'])->group(function () {
+
+
+
+    Route::get('/surveys', [SurveyController::class, 'index'])->name('surveys.index');
+
+    Route::post('/aaa/survey/{id}', [SurveyController::class, 'submitSurvey'])->name('survey.submit');
+    Route::get('/survey/reponse/{slug}', [SurveyController::class, 'showSurvey'])->name('survey.rshow');
+    Route::get('/surveys/a/{slug}', [SurveyController::class, 'show'])->name('surveys.show');
+
+    // resultat
+    Route::get('/surveys/{survey}/resuls', [SurveyController::class, 'showResults'])->name('surveys.resuls');
+    Route::get('/surveys/{survey}/results', [SurveyController::class, 'userResponses'])->name('surveys.results');
+
+
+    Route::get('/survey/respond/{survey}', [SurveyController::class, 'respond'])->name('survey.respond');
+
+
+    Route::get('/withdrawals/user', [WithdrawalController::class, 'indexUser'])->name('withdrawals.indexUser');
+    Route::get('/withdrawals/listUser', [WithdrawalController::class, 'listUser'])->name('withdrawals.listUser');
+    Route::get('/withdrawals/list', [WithdrawalController::class, 'list'])->name('withdrawals.list');
+    // Route::post('/withdrawals', [WithdrawalController::class , 'store'])->name('withdrawals.store');
+    Route::get('/withdrawals/create', [WithdrawalController::class, 'create'])->name('withdrawals.create');
+
+
+    Route::get('/subscribess', [SubscriptionController::class, 'showSubscriptionPlans'])->name('subscription-plans.index');
+
+});
+
+
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/referral-code', [MyReferralCodeGenerator::class, 'generateReferralCode'])->name('referral.code');
 // });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['can:manage-users'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->middleware('auth:sanctum')->name('dashboard');
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
@@ -87,25 +117,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/user/search', [UserController::class, 'search'])->name('videos.search');
 });
 
-Route::middleware(['can:all-users'])->group(function () {
-
-
-
-    Route::get('/surveys', [SurveyController::class, 'index'])->name('surveys.index');
-
-    Route::post('/survey/{survey}', [SurveyController::class, 'submitSurvey'])->name('survey.submit');
-    Route::get('/survey/reponse/{slug}', [SurveyController::class, 'showSurvey'])->name('survey.rshow');
-    Route::get('/surveys/a/{slug}', [SurveyController::class, 'show'])->name('surveys.show');
-
-    // resultat
-    Route::get('/surveys/{survey}/resuls', [SurveyController::class, 'showResults'])->name('surveys.resuls');
-    Route::get('/surveys/{survey}/results', [SurveyController::class, 'userResponses'])->name('surveys.results');
-
-
-    Route::get('/survey/respond/{survey}', [SurveyController::class, 'respond'])->name('survey.respond');
-});
 // ADMIN ACCESS ROUTES
-Route::middleware(['can:manage-users'])->group(function () {
+Route::middleware(['can:manage-users'])->prefix('admin')->group(function () {
 
     Route::get('/surve/create', [SurveyController::class, 'create'])->name('surveys.create');
     Route::post('/surveys', [SurveyController::class, 'store'])->name('surveys.store');
@@ -136,13 +149,6 @@ Route::middleware(['can:manage-users'])->group(function () {
     // });
 });
 
-Route::middleware(['can:all-users'])->group(function () {
-    Route::get('/withdrawals/user', [WithdrawalController::class, 'indexUser'])->name('withdrawals.indexUser');
-    Route::get('/withdrawals/listUser', [WithdrawalController::class, 'listUser'])->name('withdrawals.listUser');
-    Route::get('/withdrawals/list', [WithdrawalController::class, 'list'])->name('withdrawals.list');
-    // Route::post('/withdrawals', [WithdrawalController::class , 'store'])->name('withdrawals.store');
-    Route::get('/withdrawals/create', [WithdrawalController::class, 'create'])->name('withdrawals.create');
-});
 
 // Admin Access routes
 Route::middleware(['can:manage-users'])->group(function () {
@@ -160,7 +166,6 @@ Route::middleware(['can:manage-users'])->group(function () {
     Route::get('/withdrawal/progress', [WithdrawalController::class, 'inProgress'])->name('withdrawals.inProgress');
     // });
 
-    Route::get('videoos', [VideoController::class, 'index'])->name('videos.indeex');
     // Route::get('/withdrawals/in', [WithdrawalController::class , 'inProgress'])->name('withdrawals.inProgress');
 
     Route::get('/subscription-plans/create', [SubscriptionPlanController::class, 'create'])->name('subscription-plans.create');
@@ -169,11 +174,11 @@ Route::middleware(['can:manage-users'])->group(function () {
 
 
 
-    Route::get('/subscribess', [SubscriptionController::class, 'showSubscriptionPlans'])->name('subscription-plans.index');
-    // Route::post('/subscribde/{plan}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+    Route::get('/admin/subscribess', [SubscriptionController::class, 'showSubscriptionPlansAdmin'])->name('subscription-plans.admin');
 
 
-    Route::get('subscription-plans/{slug}/edit', [SubscriptionPlanController::class, 'index'])->name('subscription-plans.index');
+    Route::get('admin/subscription-plans/index', [SubscriptionPlanController::class, 'indexAdmin'])->name('subscription-plans.admin');
+    Route::get('subscription-plans/index', [SubscriptionPlanController::class, 'index'])->name('subscription-plans.index');
     Route::get('subscription-plans/{slug}/edit', [SubscriptionPlanController::class, 'edit'])->name('subscription-plans.edit');
     Route::put('subscription-plans/{slug}', [SubscriptionPlanController::class, 'update'])->name('subscription-plans.update');
 
@@ -215,6 +220,54 @@ Route::delete('/user-levels/{userLevel}', [UserLevelController::class, 'destroy'
 // Route::middleware(['can:manage-users'])->group(function () {
 
 
+
+// });
+Route::middleware(['auth', 'check.subscription' ,  ])->group(function () {
+
+Route::get('/videos/list', [VideoController::class, 'list'])->name('videos.liste');
+Route::get('/videos/{id}', [VideoController::class, 'show'])->name('videos.show');
+
+Route::put('/videos/search', [VideoController::class, 'search'])->name('videos.search');
+// user_favorite_video
+// Exemple de route dans le fichier de routes (web.php ou api.php)
+Route::post('/videos/{vid}/favorite', [VideoController::class, 'addToFavorites'])->name('videos.favorite');
+Route::delete('/videos/{vid}/favorite', [VideoController::class, 'removeFromFavorites'])->name('videos.unfavorite');
+
+Route::post('/videos/{video}/like', [VideoController::class, 'like'])->name('videos.like');
+
+
+ });
+
+ Route::middleware(['auth','can:manage-users'])->group(function () {
+
+Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
+
+Route::get('/admin/videos/create', [VideoController::class, 'create'])->name('videos.admin.create');
+Route::post('/videos', [VideoController::class, 'store'])->name('videos.store');
+// livk
+Route::post('/videos/{video}/like', [VideoController::class, 'like'])->name('videos.like');
+
+// Route::get('/videos/{id}', [VideoController::class, 'play'])->name('videos.play');
+
+Route::get('/videos/{slug}/edit', [VideoController::class, 'edit'])->name('videos.edit');
+Route::put('/videos/{id}', [VideoController::class, 'update'])->name('videos.update');
+Route::delete('/videos/{id}', [VideoController::class, 'destroy'])->name('videos.destroy');
+
+// Active et desactiveve
+Route::put('/videos/{slug}/activate', [VideoController::class, 'activate'])->name('videos.activate');
+Route::put('/videos/{slug}/deactivate', [VideoController::class, 'deactivate'])->name('videos.deactivate');
+
+
+Route::get('/annoces', [AnnoceController::class, 'index'])->name('annoces.index');
+Route::get('/annoces/create', [AnnoceController::class, 'create'])->name('annoces.create');
+Route::post('/annoces', [AnnoceController::class, 'store'])->name('annoces.store');
+Route::get('/annoces/{annoce}/{slug?}', [AnnoceController::class, 'show'])->name('annoces.show');
+Route::get('/annoces/{annoce}/edit', [AnnoceController::class, 'edit'])->name('annoces.edit');
+Route::put('/annoces/{annoce}', [AnnoceController::class, 'update'])->name('annoces.update');
+Route::delete('/annoces/{annoce}', [AnnoceController::class, 'destroy'])->name('annoces.destroy');
+
+
+
 Route::get('/setting/role', [UserController::class, 'roles'])->name('roles.index');
 Route::get('/roles/create', [UserController::class, 'create_role'])->name('roles.create');
 Route::post('/setting/role', [UserController::class, 'store_role'])->name('role.store');
@@ -226,46 +279,9 @@ Route::put('/roles/{role}', [UserController::class, 'update_role'])->name('roles
 Route::put('/admin/users/{userId}/update-role', [UserController::class, 'updateRole'])->name('admin.updateRole');
 Route::get('/admin/users/{userId}/edit-role', [UserController::class, 'editRole'])->name('admin.editRole');
 
-// });
-// Route::middleware(['auth', 'check.subscription'])->group(function () {
-
-Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
-Route::get('/videos/list', [VideoController::class, 'list'])->name('videos.liste');
-Route::get('/videos/{id}', [VideoController::class, 'show'])->name('videos.show');
-
-//  });
-
-Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create');
-Route::post('/videos', [VideoController::class, 'store'])->name('videos.store');
-// livk
-Route::post('/videos/{video}/like', [VideoController::class, 'like'])->name('videos.like');
+ });
 
 
-// Route::get('/videos/{id}', [VideoController::class, 'play'])->name('videos.play');
-
-Route::get('/videos/{slug}/edit', [VideoController::class, 'edit'])->name('videos.edit');
-Route::put('/videos/{id}', [VideoController::class, 'update'])->name('videos.update');
-Route::delete('/videos/{id}', [VideoController::class, 'destroy'])->name('videos.destroy');
-// Active et desactiveve
-Route::put('/videos/{slug}/activate', [VideoController::class, 'activate'])->name('videos.activate');
-Route::put('/videos/{slug}/deactivate', [VideoController::class, 'deactivate'])->name('videos.deactivate');
-Route::put('/videos/search', [VideoController::class, 'search'])->name('videos.search');
-// user_favorite_video
-// Exemple de route dans le fichier de routes (web.php ou api.php)
-Route::post('/videos/{vid}/favorite', [VideoController::class, 'addToFavorites'])->name('videos.favorite');
-Route::delete('/videos/{vid}/favorite', [VideoController::class, 'removeFromFavorites'])->name('videos.unfavorite');
-
-
-
-
-
-Route::get('/annoces', [AnnoceController::class, 'index'])->name('annoces.index');
-Route::get('/annoces/create', [AnnoceController::class, 'create'])->name('annoces.create');
-Route::post('/annoces', [AnnoceController::class, 'store'])->name('annoces.store');
-Route::get('/annoces/{annoce}/{slug?}', [AnnoceController::class, 'show'])->name('annoces.show');
-Route::get('/annoces/{annoce}/edit', [AnnoceController::class, 'edit'])->name('annoces.edit');
-Route::put('/annoces/{annoce}', [AnnoceController::class, 'update'])->name('annoces.update');
-Route::delete('/annoces/{annoce}', [AnnoceController::class, 'destroy'])->name('annoces.destroy');
 
 
 

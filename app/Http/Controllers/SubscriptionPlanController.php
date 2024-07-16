@@ -13,9 +13,16 @@ class SubscriptionPlanController extends Controller
 
     public function index()
     {
-        $plans = SubscriptionPlan::all();
+        $plans = SubscriptionPlan::all()->where('is_active', true);
         return view('subscription.index', compact('plans'));
     }
+
+    public function indexAdmin()
+    {
+        $plans = SubscriptionPlan::all();
+        return view('subscription.plans', compact('plans'));
+    }
+
 
     public function create()
     {

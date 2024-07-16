@@ -20,7 +20,7 @@
         <div class="page-main">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-1 col-sm-1 ">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-1 col-sm-1 ">
                         {{-- poste Createuer et description --}}
                         @include('videos.lecture.posts')
                         {{-- Fin poste Createuer et description --}}

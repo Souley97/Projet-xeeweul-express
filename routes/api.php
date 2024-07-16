@@ -90,17 +90,17 @@ Route::post('/payment/notification', [SubscriptionController::class, 'handlePaym
 Route::get('/subscription/confirmation', [SubscriptionController::class, 'confirmation'])->name('subscription.confirmation');
 
 
-Route::get('/cinetpay', [CinetPayController::class, 'index'])->name('cinetpay');
-Route::get('/transactions', [CinetPayController::class, 'getTransactions']);
-// Route::post('/notify-url', [CinetPayController::class, 'notify_url'])->name('notify_url');
+// Route::get('/cinetpay', [CinetPayController::class, 'index'])->name('cinetpay');
+// Route::get('/transactions', [CinetPayController::class, 'getTransactions']);
+// // Route::post('/notify-url', [CinetPayController::class, 'notify_url'])->name('notify_url');
 
-Route::post('/cinetpay', [CinetPayController::class, 'Payment'])->name('cinetpay.payment');
-Route::match(['get', 'post'], '/notify_url', [CinetPayController::class, 'notify_url'])->name('notify_url');
-Route::match(['get', 'post'], '/return_url', [CinetPayController::class, 'return_url'])->name('return_url');
+// Route::post('/cinetpay', [CinetPayController::class, 'Payment'])->name('cinetpay.payment');
+// Route::match(['get', 'post'], '/notify_url', [CinetPayController::class, 'notify_url'])->name('notify_url');
+// Route::match(['get', 'post'], '/return_url', [CinetPayController::class, 'return_url'])->name('return_url');
 
-Route::get('/fetch', [CinetPayController::class, 'getTransactions'])->name('fetchTransactions');
-Route::get('/fetchA', [CinetPayController::class, 'fetchTransaction'])->name('fetchTransactions');
-Route::get('/store-transactions', [CinetPayController::class, 'storeTransactions']);
+// Route::get('/fetch', [CinetPayController::class, 'getTransactions'])->name('fetchTransactions');
+// Route::get('/fetchA', [CinetPayController::class, 'fetchTransaction'])->name('fetchTransactions');
+// Route::get('/store-transactions', [CinetPayController::class, 'storeTransactions']);
 
 
 

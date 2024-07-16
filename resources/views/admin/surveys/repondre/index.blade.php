@@ -5,7 +5,7 @@
         <form method="post" action="{{ route('survey.submit', $survey->id) }}">
             @csrf
             @foreach ($survey->questions as $question)
-                
+
             <div class="border blo border-gray-300 rounded-lg p-4 mb-4">
                 <h2 class="text-lg font-semibold">{{ $question->texte }}</h2>
                 @if ($question->type === 'choix_multiple')
@@ -34,11 +34,11 @@
                 @endif
             </div>
         @endforeach
-        
+
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Soumettre le sondage
             </button>
         </form>
-        
+
     </div>
 </x-app-layout>

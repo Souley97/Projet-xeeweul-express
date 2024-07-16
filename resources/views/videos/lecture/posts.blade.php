@@ -12,14 +12,7 @@
                                 {{ $hashVideo->titre }}</h1>
                             <div class="post-meta">
                                 <div class="post-meta__items">
-                                    <div class="post-meta__comment">
-                                        <a href="index.html#respond">
 
-                                            <span class="post-meta__icon icon-chat-empty"></span>
-                                            <span class="post-meta__text">0
-                                                comments</span>
-                                        </a>
-                                    </div>
 
 
                                     <div class="post-meta__views">
@@ -27,7 +20,7 @@
                                         {{ $video->views_count }} views
                                     </div>
                                 </div>
-                                
+
 
 
                                 <span class="post-meta__icon icon-chat-empty"></span>
@@ -39,28 +32,14 @@
                                 data-on-title="Turn off light" data-off-title="Turn on light"> <span
                                     class="text-secondary icon-lightbulb"></span>
                             </button>
-                            <button id="btn-up-next" class="btn p-1 rounded-1 bg-light border btn-upnext "
-                                title="Turn on Up Next" "> <span class="text-secondary icon-toggle-off"></span>
-                            </button>
-                            <div class="next-prev-nav d-flex gap-2">
-                                <a id="previous-post-link" class="btn p-1 rounded-1 bg-light border"
-                                    href="#" title="Just Cause 3 Gameplay Trailer"> <span
-                                        class="text-secondary icon-left-open"></span>
-                                </a>
-                                <a id="next-post-link" class="btn p-1 rounded-1 bg-light border"
-                                    href="#" title="Exploring Witcher 3&#039;s Open World"> <span
-                                        class="text-secondary icon-right-open"></span>
-                                </a>
-                            </div>
+
+
                         </div>
                     </div>
                     <div class="post-options d-flex pt-4">
                         <div class="d-flex mx-auto gap-4">
                             <div class="button-group button-group-gift">
-                                <button type="button" class="btn shadow-none px-1 " data-bs-toggle="modal"
-                                    data-bs-target="#modal-login" title="Send Points as a Gift"> <span
-                                        class="btn__icon icon-gift"></span>
-                                </button>
+
                             </div>
                             <div class="wppl-button-wrap button-group position-relative">
                                 <div class="d-flex gap-4">
@@ -85,7 +64,7 @@
                                     </form>
 
 
-                                    <form class="form-ajax form-post-like position-relative" method="post">
+                                    {{-- <form class="form-ajax form-post-like position-relative" method="post">
                                         <button type="button" value="dislike"
                                             class="wppl-dislike-button btn px-1 border-0 position-relative shadow-none "
                                             data-bs-toggle="modal" data-bs-target="#modal-login"> <span
@@ -94,21 +73,10 @@
                                                 0 </span>
                                         </button>
 
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </div>
-                            <div class="button-group button-group-share">
-                                <button class="btn shadow-none px-1" data-bs-toggle="modal"
-                                    data-bs-target="#modal-video-share" title="Share">
-                                    <span class="btn__icon icon-share"></span>
-                                </button>
-                            </div>
-                            <div class="button-group button-group-report">
-                                <button class="btn shadow-none px-1" data-bs-toggle="modal"
-                                    data-bs-target="#modal-login" title="Report"> <span
-                                        class="btn__icon icon-flag-empty"></span>
-                                </button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -131,7 +99,7 @@
                             <div class="d-flex gap-3 align-items-center">
                                 <div class="follow-button-group " data-user-id="7">
                                     <form class="form-ajax" method="post">
-                                        <div class="btn-group">
+                                        {{-- <div class="btn-group">
                                             <button type="button"
                                                 class="btn btn-follow shadow-none px-3 d-inline-flex d-flex align-items-center btn-secondary btn-sm"
                                                 data-bs-toggle="modal" data-bs-target="#modal-login">
@@ -139,11 +107,11 @@
                                                 <span class="btn__text">Follow</span>
                                             </button>
                                             <button class="btn btn-sm btn-danger px-3">2</button>
-                                        </div>
+                                        </div> --}}
 
                                     </form>
                                 </div>
-                                <div class="button-private-message">
+                                {{-- <div class="button-private-message">
                                     <button id="btn-private-message"
                                         class="btn px-2 shadow-none d-flex align-items-center btn-sm position-relative btn-secondary"
                                         data-bs-toggle="modal" data-bs-target="#modal-login" data-recipient-id="7">
@@ -151,7 +119,7 @@
                                             class="btn__icon position-absolute top-50 start-50 translate-middle icon-mail"
                                             data-bs-toggle="tooltip" data-bs-title="Private Message"></span>
                                     </button>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>

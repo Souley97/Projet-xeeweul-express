@@ -41,7 +41,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:underline">
-                                    <button @click="open = true" class="bg-red-400 text-white py-2 px-4 rounded hover:bg-red-700">
+                                    <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette Objet?')" class="bg-red-400 text-white py-2 px-4 rounded hover:bg-red-700">
                                         Supprimer
                                     </button>
                                 </button>

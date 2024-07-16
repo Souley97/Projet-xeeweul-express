@@ -2,7 +2,7 @@
 
 
 
-        <div class="bg-white p-2 shadow-md rounded-lg">
+        <div class="bg-white mt-9 p-2 shadow-md rounded-lg">
             <div class="flex items-center justify-between mb-4">
                 <h1 class="text-xl font-semibold">Liste des Questions</h1>
 
@@ -41,15 +41,15 @@
                                         Éditer
                                     </button>
                                 </a>
-                                <form action="{{ route('subscription-plans.destroy', $plan->id) }}" method="POST" class="inline">
+                                {{-- <form action="{{ route('subscription-plans.destroy', $plan->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-500 hover:underline">
-                                        <button @click="open = true" class="bg-red-400 text-white py-2 px-4 rounded hover:bg-red-700">
+                                        <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette Objet?')" class="bg-red-400 text-white py-2 px-4 rounded hover:bg-red-700">
                                             Supprimer
                                         </button>
                                     </button>
-                                </form>
+                                </form> --}}
 
 
                                 </div>

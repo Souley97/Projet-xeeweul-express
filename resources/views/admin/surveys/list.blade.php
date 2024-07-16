@@ -35,11 +35,10 @@
                                 <a href="{{ route('surveys.edit', $survey->id) }}"
                                     class="text-blue-500 hover:underline"><button @click="open = true" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Éditer</button></a>
                                 <form class="inline" action="{{ route('surveys.destroy', $survey->id) }}"
-                                    method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                        class="text-red-500 hover:underline ml-2"><button @click="open = true" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">Supprimer</button></button>
+                                        class="text-red-500 hover:underline ml-2"><button  onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette Objet?')"> class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">Supprimer</button></button>
                                 </form>
                             </td>
                         @endif

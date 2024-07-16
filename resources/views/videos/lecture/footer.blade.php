@@ -2,7 +2,7 @@
     <div class="footer-sidebar">
         <div class="container container-footer">
             <div class="row">
-               
+
                 <div class="footer-socials py-4 text-center">
                     <div class="container">
                         <h3 class="widget-title no-after mb-4">
@@ -10,10 +10,7 @@
                         <ul class="social-list list-unstyled">
                             <li class="social__youtube"><a target="_blank" href="#"><span
                                         class="icon-youtube icon-youtube-circled"></span></a>
-                            <li class="social__vimeo"><a target="_blank" href="#"><span
-                                        class="icon-vimeo icon-vimeo-circled"></span></a>
-                            <li class="social__pinterest"><a target="_blank" href="#"><span
-                                        class="icon-pinterest icon-pinterest-circled"></span></a>
+
                             <li class="social__linkedin"><a target="_blank" href="#"><span
                                         class="icon-linkedin icon-linkedin-circled"></span></a>
                             <li class="social__facebook"><a target="_blank" href="#"><span
@@ -26,7 +23,7 @@
                         <div class="copyright-text">Copyright 2023 Bamsachine DigiTech</div>
                     </div>
                 </div>
-               
+
             </div>
         </div>
     </div>

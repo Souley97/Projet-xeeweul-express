@@ -20,7 +20,7 @@ class SurveyResponse extends Model
     {
         return [
             'slug' => [
-                'source' => 'titre',
+                'source' => 'question_id',
             ],
         ];
     }
